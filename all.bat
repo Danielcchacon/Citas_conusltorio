@@ -1,13 +1,14 @@
-set PGPASSWORD=12345
+# Establecer la contraseña de MySQL
+export MYSQL_PWD=12345
 
-SET PGCLIENTENCODING=utf8
+# Establecer la codificación del cliente (esto puede ser innecesario dependiendo de la configuración de tu entorno MySQL)
+export MYSQL_CLIENT_ENCODING=utf8
 
-@REM tablas
-psql -U postgres -d citas_conusltorio -f ./script.sql
+# Ejecutar el script de creación de tablas
+mysql -u root -D consultorio < ./script.sql
 
-@REM llaves primarias
-psql -U postgres -d citas_conusltorio -f ./constraints/pk.sql
+# Ejecutar el script de llaves primarias
+mysql -u root -D consultorio < ./constraints/pk.sql
 
-@REM llaves foranea
-psql -U postgres -d citas_conusltorio -f ./constraints/fk.sql
-
+# Ejecutar el script de llaves foráneas
+mysql -u root -D consultorio < ./constraints/fk.sql
