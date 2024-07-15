@@ -31,7 +31,7 @@
       <div class="animate form login_form">
         <section class="login_content">
           <form action="index.php?controller=LoginController&action=authenticate" method="post">
-            <h1><img src="assets/image/logo.jpg" alt="fachada" class="centrado"></h1>
+            <h1>Login Form</h1>
             <div>
               <input type="text" name="username" class="form-control" placeholder="Username" required="" />
             </div>
