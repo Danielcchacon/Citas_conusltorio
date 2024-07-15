@@ -1,17 +1,21 @@
 <?php
 require_once 'models/User.php';
 
-class LoginController {
+class LoginController
+{
     private $conn; // Variable para almacenar la conexión
 
-    public function __construct() {
+    public function __construct()
+    {
         // Incluir el archivo de conexión a la base de datos
         $this->conn = include 'db.php';
     }
-    public function index() {
+    public function index()
+    {
         include 'views/login/login.php';
     }
-    public function authenticate() {
+    public function authenticate()
+    {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -20,15 +24,28 @@ class LoginController {
             $loggedInUser = $user->authenticate($username, $password);
 
             if ($loggedInUser) {
-                session_start();
+               
                 $_SESSION['user_id'] = $loggedInUser['usuario_id'];
                 $_SESSION['username'] = $loggedInUser['nombres_usuario'];
-             return true;
+                return true;
             } else {
                 header("Location: index.php?controller=LoginController&action=index&error=1");
                 exit();
             }
         }
     }
+    public function logout() {
+        // Iniciar la sesión para poder destruirla
+        session_start();
+        // Eliminar todas las variables de sesión
+        session_unset();
+        // Destruir la sesión
+        session_destroy();
+        
+        // Redirigir a la página deseada sin parámetros en la URL
+        header("Location: /consultorio/index.php"); // Asegúrate de poner la ruta deseada
+        exit();
+    }
+    
 }
 ?>

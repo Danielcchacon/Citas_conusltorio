@@ -1,3 +1,23 @@
+<style>
+.sidebar-footer {
+    text-align: center;
+    padding: 10px;
+}
+
+.sidebar-link, .sidebar-button {
+    color: #555;
+    padding: 10px;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.sidebar-link:hover, .sidebar-button:hover {
+    color: #333;
+}
+</style>
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
@@ -110,9 +130,11 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
+              <form id="logoutForm" action="index.php?controller=LoginController&action=logout" method="post" style="display: inline;">
+        <button type="button" id="logoutButton" class="sidebar-button" data-toggle="tooltip" data-placement="top" title="Logout">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+        </button>
+    </form>
             </div>
             <!-- /menu footer buttons -->
           </div>
@@ -209,3 +231,23 @@
             </nav>
           </div>
         </div>
+        <script>
+    // Captura el clic en el botón de logout
+    document.getElementById('logoutButton').addEventListener('click', function() {
+        // Mostrar SweetAlert de confirmación
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¿Quieres cerrar sesión?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, cerrar sesión'
+        }).then((result) => {
+            // Si el usuario confirma, enviar el formulario de logout
+            if (result.isConfirmed) {
+                document.getElementById('logoutForm').submit();
+            }
+        });
+    });
+</script>
