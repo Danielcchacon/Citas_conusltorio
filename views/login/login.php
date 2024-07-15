@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style = "background-color: cadetblue;">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
@@ -31,23 +31,23 @@
       <div class="animate form login_form">
         <section class="login_content">
           <form action="index.php?controller=LoginController&action=authenticate" method="post">
-            <h1>Login Form</h1>
+            <h1><img src="assets/image/logo.jpg" alt="fachada" class="centrado" style = "border-radius: 100px;"></h1>
             <div>
-              <input type="text" name="username" class="form-control" placeholder="Username" required="" />
+              <input type="text" name="username" class="form-control" placeholder="Correo" required="" />
             </div>
             <div>
-              <input type="password" name="password" class="form-control" placeholder="Password" required="" />
+              <input type="password" name="password" class="form-control" placeholder="Contraseña" required="" />
             </div>
             <div>
-              <button type="submit" class="btn btn-default submit">Log in</button>
-              <a class="reset_pass" href="#">Lost your password?</a>
+              <button type="submit" class="btn btn-default submit">Ingresar</button>
+              <a class="reset_pass" href="#">Olvidaste la contraseña?</a>
             </div>
 
             <div class="clearfix"></div>
 
             <div class="separator">
-              <p class="change_link">New to site?
-                <a href="#signup" class="to_register"> Create Account </a>
+              <p class="change_link">Nuevo en el sitio?
+                <a href="#signup" class="to_register"> Crea una cuenta </a>
               </p>
 
               <div class="clearfix"></div>
@@ -64,7 +64,7 @@
       <div id="register" class="animate form registration_form">
         <section class="login_content">
           <form>
-            <h1>Create Account</h1>
+            <h1>Crea tu Cuenta</h1>
             <div>
               <input type="text" class="form-control" placeholder="Username" required="" />
             </div>
@@ -82,7 +82,7 @@
 
             <div class="separator">
               <p class="change_link">Already a member ?
-                <a href="#signin" class="to_register"> Log in </a>
+                <a href="#signin" class="to_register"> Ingresar </a>
               </p>
 
               <div class="clearfix"></div>
