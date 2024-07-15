@@ -48,7 +48,16 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <?php
+                   
+                   if (isset($_SESSION['username'])) {
+                       echo "<h2>" . $_SESSION['username'] . "</h2>";
+                   } else {
+                       echo "<h2>Guest</h2>";
+                   }
+               
+        ?>
+               
               </div>
             </div>
             <!-- /menu profile quick info -->
