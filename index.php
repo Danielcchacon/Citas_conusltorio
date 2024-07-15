@@ -3,7 +3,7 @@
 session_start();
 
 // Check if the user is logged in
-$login = isset($_SESSION['username']);
+$login = isset($_SESSION['id_user']);
 
 // Autoload controllers
 spl_autoload_register(function ($class_name) {
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Authenticate user
     $controller->authenticate($_POST);
     // Update login status after authentication
-    $login = isset($_SESSION['username']);
+    $login = isset($_SESSION['id_user']);
 }
 
 // Determine which view to load

@@ -25,8 +25,9 @@ class LoginController
 
             if ($loggedInUser) {
                
-                $_SESSION['user_id'] = $loggedInUser['usuario_id'];
-                $_SESSION['username'] = $loggedInUser['nombres_usuario'];
+                $_SESSION['id_user'] = $loggedInUser['usuario_id'];
+                $_SESSION['nombre'] = $loggedInUser['nombres_usuario'];
+                $_SESSION['apellido'] = $loggedInUser['apellidos_usuario'];
                 return true;
             } else {
                 header("Location: index.php?controller=LoginController&action=index&error=1");

@@ -47,18 +47,16 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="build/images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Bienvenido,</span>
                 <?php
-                   
-                   if (isset($_SESSION['username'])) {
-                       echo "<h2>" . $_SESSION['username'] . "</h2>";
+                   if (isset($_SESSION['nombre'])) {
+                       echo "<h2>" . $_SESSION['nombre'] ." ". $_SESSION['apellido']."</h2>";
                    } else {
                        echo "<h2>Guest</h2>";
-                   }
-               
+                   }        
         ?>
                
               </div>
