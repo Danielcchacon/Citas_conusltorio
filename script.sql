@@ -1,30 +1,28 @@
--- Crear la base de datos si no existe
+
+DROP DATABASE IF EXISTS consultorio;
 CREATE DATABASE IF NOT EXISTS consultorio;
 
--- Usar la base de datos
 USE consultorio;
 
--- Crear tabla "tipo_usuario"
 CREATE TABLE tipo_usuario (
     tipo_usuario_id INT AUTO_INCREMENT PRIMARY KEY,
     descripcion_tipo_usuario VARCHAR(200) NOT NULL
 );
 
--- Crear tabla "usuario"
-CREATE TABLE usuario (
-    usuario_id INT AUTO_INCREMENT PRIMARY KEY,
-    nombres_usuario VARCHAR(150),
-    apellidos_usuario VARCHAR(150),
-    contraseña_usuario VARCHAR(200),
-    documento_usuario VARCHAR(15),
-    correo_usuario VARCHAR(200),
-    telefono_usuario VARCHAR(15),
-    tipo_usuario INT NOT NULL,
-    estado_usuario VARCHAR(20),
-    fecha_usuario TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
--- Crear tabla "eps"
+CREATE TABLE `usuario` (
+  `usuario_id` int NOT NULL AUTO_INCREMENT,
+  `nombres_usuario` varchar(150) DEFAULT NULL,
+  `apellidos_usuario` varchar(150) DEFAULT NULL,
+  `contraseña_usuario` varchar(200) DEFAULT NULL,
+  `documento_usuario` varchar(15) DEFAULT NULL,
+  `correo_usuario` varchar(200) DEFAULT NULL,
+  `telefono_usuario` varchar(15) DEFAULT NULL,
+  `tipo_usuario` int NOT NULL,
+  `estado_usuario` varchar(20) DEFAULT NULL,
+  `fecha_usuario` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`usuario_id`)
+);
 CREATE TABLE eps (
     eps_id INT AUTO_INCREMENT PRIMARY KEY,
     nombre_eps VARCHAR(80) NOT NULL,
@@ -35,13 +33,11 @@ CREATE TABLE eps (
     estado_eps VARCHAR(20)
 );
 
--- Crear tabla "tipo_regimen"
 CREATE TABLE tipo_regimen (
     tipo_regimen_id INT AUTO_INCREMENT PRIMARY KEY,
     descripcion_tipo_regimen VARCHAR(200) NOT NULL
 );
 
--- Crear tabla "paciente"
 CREATE TABLE paciente (
     paciente_id INT AUTO_INCREMENT PRIMARY KEY,
     nombres_paciente VARCHAR(150),
@@ -55,13 +51,11 @@ CREATE TABLE paciente (
     fecha_registro_paciente TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Crear tabla "tipo_medico"
 CREATE TABLE tipo_medico (
     tipo_medico_id INT AUTO_INCREMENT PRIMARY KEY,
     descripcion_tipo_medico VARCHAR(200) NOT NULL
 );
 
--- Crear tabla "medico"
 CREATE TABLE medico (
     medico_id INT AUTO_INCREMENT PRIMARY KEY,
     nombres_medico VARCHAR(150),
@@ -74,13 +68,11 @@ CREATE TABLE medico (
     fecha_registro_medico TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Crear tabla "tipo_consulta"
 CREATE TABLE tipo_consulta (
     tipo_consulta_id INT AUTO_INCREMENT PRIMARY KEY,
     descripcion_tipo_consulta VARCHAR(200) NOT NULL
 );
 
--- Crear tabla "consulta"
 CREATE TABLE consulta (
     consulta_id INT AUTO_INCREMENT PRIMARY KEY,
     paciente_id INT NOT NULL,
