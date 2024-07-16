@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -31,6 +32,16 @@
       <!-- Include SweetAlert CSS and JS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
+    
+ <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+  <style>
+    .fc-day-today {
+      background-color: #ffeb3b !important; /* Highlight today's date */
+    }
+  </style>
+
+
   </head>
 
   <body class="nav-md">
@@ -39,7 +50,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a  class="site_title"><i class="fa fa-stethoscope"></i></fa-solid> <span> consultorio</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -65,3 +76,4 @@
 
             <br />
             <?php include 'aside.php'; ?>
+            <div class="right_col" role="main">

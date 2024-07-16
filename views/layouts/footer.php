@@ -1,3 +1,5 @@
+    </div>
+
 <footer>
           <div class="pull-right">
             Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
@@ -48,6 +50,32 @@
 
     <!-- Custom Theme Scripts -->
     <script src="./build/js/custom.min.js"></script>
-	
+
+    <!-- FullCalendar Initialization -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          locale: 'es',
+          headerToolbar: {
+            left: '',
+            center: 'title',
+            right: ''
+          },
+          selectable: false,
+          editable: false,
+          events: [],
+          dayCellDidMount: function(info) {
+            if (info.date.getTime() === new Date().setHours(0,0,0,0)) {
+              info.el.style.backgroundColor = '#ffeb3b';
+            }
+          }
+        });
+
+        calendar.render();
+      });
+    </script>
   </body>
 </html>
