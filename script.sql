@@ -79,9 +79,9 @@ CREATE TABLE consulta (
     tipo_consulta_id INT NOT NULL,
     medico_id INT NOT NULL,
     fecha_consulta TIMESTAMP,
-    antecedentes_medicos VARCHAR(255) NOT NULL,
+    antecedentes_medicos VARCHAR(255),
     examen_fisico VARCHAR(255),
-    diagnostico VARCHAR(255) NOT NULL,
+    diagnostico VARCHAR(255) ,
     tratamiento_medico VARCHAR(255),
     evolucion_paciente VARCHAR(255)
 );
