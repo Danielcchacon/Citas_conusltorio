@@ -1,6 +1,6 @@
 @echo off
-REM Establecer la contraseña de MySQL como variable de entorno (reemplaza '12345' con tu contraseña real)
-set MYSQL_PWD=12345
+REM Solicitar la contraseña al usuario
+set /p MYSQL_PWD=Introduce la contraseña de MySQL y presiona Enter:
 
 REM Ejecutar los scripts SQL uno por uno con mensajes descriptivos
 echo Ejecutando script.sql...
@@ -39,8 +39,29 @@ mysql -u root -p%MYSQL_PWD% -D consultorio < .\data\paciente.sql
 echo Ejecutando consulta.sql...
 mysql -u root -p%MYSQL_PWD% -D consultorio < .\data\consulta.sql
 
+echo Ejecutando agregar_eps.sql...
+mysql -u root -p%MYSQL_PWD% -D consultorio < .\funciones\agregar_eps.sql
+
+echo Ejecutando agregar_usuario.sql...
+mysql -u root -p%MYSQL_PWD% -D consultorio < .\funciones\agregar_usuario.sql
+
+echo Ejecutando agregar_paciente.sql...
+mysql -u root -p%MYSQL_PWD% -D consultorio < .\funciones\agregar_paciente.sql
+
+echo Ejecutando agregar_medico.sql...
+mysql -u root -p%MYSQL_PWD% -D consultorio < .\funciones\agregar_medico.sql
+
 REM Limpiar la variable de entorno después de su uso
 set MYSQL_PWD=
 
-echo Proceso completado.
+echo Proceso de configuración de base de datos completado.
+
+REM Ejecutar pruebas desde la carpeta "test"
+echo Ejecutando pruebas automatizadas...
+for %%f in (.\test_funciones\*.bat) do (
+    echo Ejecutando prueba %%~nf...
+    call %%f
+)
+
+echo Pruebas automatizadas completadas.
 pause
