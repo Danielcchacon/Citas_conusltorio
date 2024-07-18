@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="images/favicon.ico" type="image/ico" />
+	<link rel="icon" href="assets/image/logo.jpg" type="image/ico" />
 
     <title>Gentelella Alela!</title>
 
@@ -27,18 +27,32 @@
     <!-- bootstrap-daterangepicker -->
     <link href="./vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
+  <!-- Incluye FullCalendar CSS localmente -->
     <!-- Custom Theme Style -->
     <link href="./build/css/custom.min.css" rel="stylesheet">
       <!-- Include SweetAlert CSS and JS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.all.min.js"></script>
     
- <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
-  <style>
+<!-- Tempus Dominus CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.0.0-beta.6/dist/css/tempus-dominus.min.css" />
+
+<style>
     .fc-day-today {
       background-color: #ffeb3b !important; /* Highlight today's date */
     }
+
+    .table .thead-dark th {
+    color: #fff;
+    background-color: #2A3F54 !important;
+    border-color: #ffffff !important;
+}
+
+.colordefault{
+
+  background-color: #2A3F54 !important;
+  border-color: #2A3F54 !important;
+}
   </style>
 
 

@@ -31,7 +31,7 @@
                   </li>
                   <li><a><i class="fa fa-shield"></i>Seguridad <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Gestión de Usuarios</a></li>
+                      <li><a href="?page=users/list">Gestión de Usuarios</a></li>
                       <li><a href="fixed_footer.html">Cambiar Contraseña</a></li>
                     </ul>
                   </li>
@@ -85,7 +85,6 @@
                   <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
                     <li class="nav-item">
                       <a class="dropdown-item">
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -97,7 +96,6 @@
                     </li>
                     <li class="nav-item">
                       <a class="dropdown-item">
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -109,7 +107,6 @@
                     </li>
                     <li class="nav-item">
                       <a class="dropdown-item">
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -121,7 +118,6 @@
                     </li>
                     <li class="nav-item">
                       <a class="dropdown-item">
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>

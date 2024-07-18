@@ -4,7 +4,6 @@ require_once 'models/User.php';
 class HomeController
 {
     private $conn; // Variable para almacenar la conexión
-
     public function __construct()
     {
         // Incluir el archivo de conexión a la base de datos
@@ -14,6 +13,5 @@ class HomeController
     {
         include 'views/admin/home.php';
     }
-
 }
 ?>

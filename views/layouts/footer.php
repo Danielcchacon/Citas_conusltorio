@@ -1,14 +1,12 @@
     </div>
 
-<footer>
-          <div class="pull-right">
+    <footer>
+        <div class="pull-right">
             Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-      </div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
 
     <!-- jQuery -->
     <script src="./vendors/jquery/dist/jquery.min.js"></script>
@@ -47,35 +45,71 @@
     <!-- bootstrap-daterangepicker -->
     <script src="./vendors/moment/min/moment.min.js"></script>
     <script src="./vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
+    <!-- Tempus Dominus JS -->
     <!-- Custom Theme Scripts -->
     <script src="./build/js/custom.min.js"></script>
+    <!-- FullCalendar JS localmente -->
+    <script src="./vendors/fullcalendar/dist/index.global.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.0.0-beta.6/dist/js/tempus-dominus.min.js"></script>
 
-    <!-- FullCalendar Initialization -->
+    
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-          locale: 'es',
-          headerToolbar: {
-            left: '',
-            center: 'title',
-            right: ''
-          },
-          selectable: false,
-          editable: false,
-          events: [],
-          dayCellDidMount: function(info) {
-            if (info.date.getTime() === new Date().setHours(0,0,0,0)) {
-              info.el.style.backgroundColor = '#ffeb3b';
+        document.addEventListener('DOMContentLoaded', function() {
+      // Función para abrir el modal y mostrar la fecha seleccionada
+      window.abrirModal = function(info) {
+                document.getElementById('selectedDate').textContent = 'Fecha seleccionada: ' + info.dateStr;
+                $('#dateModal').modal('show'); // Abre el modal usando jQuery
             }
-          }
-        });
 
-        calendar.render();
-      });
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                    center: 'title',
+                    right: 'prev,next today'
+                },
+                dateClick: function(info) {
+                    abrirModal(info); // Llama a la función para abrir el modal con la fecha seleccionada
+                }
+            });
+            calendar.render();
+
+            // Inicializar Tempus Dominus para el selector de hora
+            $('#horaPicker').datetimepicker({
+                format: 'HH:mm',
+                icons: {
+                    time: 'fa fa-clock-o',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-calendar-check-o',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            });
+
+      
+
+            // Función para agregar cita (simulación)
+            window.agregarCita = function() {
+                var medico = document.getElementById('selectMedico').value;
+                var paciente = document.getElementById('selectPaciente').value;
+                var fecha = document.getElementById('selectedDate').textContent.replace('Fecha seleccionada: ', '');
+                var hora = document.getElementById('hora').value;
+                console.log('Médico seleccionado:', medico);
+                console.log('Paciente seleccionado:', paciente);
+                console.log('Fecha seleccionada:', fecha);
+                console.log('Hora seleccionada:', hora);
+                // Aquí puedes implementar la lógica para agregar la cita, por ejemplo, enviar datos a una API o procesar en el backend
+                // Después de agregar la cita, cierra el modal
+                $('#dateModal').modal('hide');
+            }
+        });
     </script>
-  </body>
+</body>
 </html>

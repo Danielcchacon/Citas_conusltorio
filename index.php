@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Determine which view to load
 if ($login) {
     $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+
     $view = 'views/admin/' . $page . '.php';
     if (file_exists($view)) {
         include $view;

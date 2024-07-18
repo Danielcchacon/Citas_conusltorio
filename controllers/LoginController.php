@@ -4,10 +4,9 @@ require_once 'models/User.php';
 class LoginController
 {
     private $conn; // Variable para almacenar la conexión
-
     public function __construct()
     {
-        // Incluir el archivo de conexión a la base de datos
+     // Incluir el archivo de conexión a la base de datos
         $this->conn = include 'db.php';
     }
     public function index()
@@ -49,4 +48,3 @@ class LoginController
     }
     
 }
-?>
