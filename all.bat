@@ -51,6 +51,9 @@ mysql -u root -p%MYSQL_PWD% -D consultorio < .\funciones\agregar_paciente.sql
 echo Ejecutando agregar_medico.sql...
 mysql -u root -p%MYSQL_PWD% -D consultorio < .\funciones\agregar_medico.sql
 
+echo Ejecutando agregar_consulta.sql...
+mysql -u root -p%MYSQL_PWD% -D consultorio < .\funciones\agregar_consulta.sql
+
 REM Limpiar la variable de entorno después de su uso
 set MYSQL_PWD=
 

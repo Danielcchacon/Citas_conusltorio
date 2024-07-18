@@ -56,4 +56,3 @@ BEGIN
     RETURN 'Consulta agregada exitosamente.';
 END //
 
-DELIMITER;
