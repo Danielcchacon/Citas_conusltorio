@@ -1,7 +1,7 @@
 INSERT INTO `usuario` (
     `nombres_usuario`, 
     `apellidos_usuario`, 
-    `contraseña_usuario`,
+    `contrasena_usuario`,
     `documento_usuario`, 
     `correo_usuario`, 
     `telefono_usuario`, 
