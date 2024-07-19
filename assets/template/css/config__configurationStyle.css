@@ -1,0 +1,11 @@
+.skin-blue .main-header .navbar,
+.skin-blue .main-header .logo,
+.main-header .sidebar-toggle:hover,
+.main-footer,
+html, body {
+    background-color: #222d32 !important;
+}
+.main-footer {
+    color: rgb(113, 113, 113);
+}
+

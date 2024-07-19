@@ -1,0 +1,404 @@
+* {
+  box-sizing: border-box;
+}
+/*==================================================DARK MODE=========================================*/
+.nav1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilos para el botón de cambio de modo */
+#toggleMode {
+  background-color: #39ace7;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+#toggleMode:hover {
+  background-color: #288cc0;
+}
+/*=======================================================================================================*/
+/*config*/
+.inactive {
+  cursor: pointer;
+}
+*:focus {
+  outline: none;
+}
+#icon {
+  width: 40%;
+}
+/*Estilos del fondo de la pagina del Login Principal*/
+body {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+}
+/*===========================================================================*/
+/*barra de navegacion*/
+.nav {
+  padding: 10px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav p {
+  position: relative;
+  font-size: 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 2;
+  transition: color 0.3s;
+  animation: changeColor 10s infinite linear;
+}
+
+.nav p:nth-child(1) {
+  color: #39ace7;
+}
+
+.nav p:nth-child(2) {
+  color: #39ace7;
+}
+
+.nav p:nth-child(3) {
+  color: #39ace7;
+}
+
+.nav p:nth-child(3) {
+  color: #39ace7;
+}
+
+.nav p:nth-child(4) {
+  color: #39ace7;
+}
+
+.nav p:nth-child(5) {
+  color: #39ace7;
+  margin-right: 3px;
+}
+.nav {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+  animation: changeColor 20s infinite linear;
+}
+.nav p {
+  /*titulo de la pagina*/
+  font-size: 40px;
+  font-family: 'Russo One', sans-serif;
+  padding-left: 2%px;
+  transition: 0.2s;
+  color: rgb(80, 80, 80);
+}
+.nav p:hover {
+  /*titulo de la pagina*/
+  cursor: pointer;
+  font-size: 46px;
+}
+/*===========================================================================*/
+a {
+  color: #888888;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+a:hover {
+  color: #39ace7;
+}
+
+h2 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 40px 8px 10px 8px;
+  color: #838383;
+}
+
+/*structura*/
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  z-index: 10;
+
+
+}
+
+/*contenedor primario del login*/
+#formContent {
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 430px;
+  position: relative;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
+  transition: 0.5s;
+
+}
+
+#formContent:hover {
+  transform: translate(0, -20px);
+  box-shadow: 2px 2px 20px rgb(216, 216, 216);
+
+}
+
+
+#formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 25px;
+  text-align: center;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
+/* TABS */
+h2.inactive {
+  color: #838383;
+}
+h2.active {
+  color: #838383;
+  border-bottom: 2px solid #5fbae9;
+}
+/* FORM TYPOGRAPHY*/
+input[type=submit] {
+  background-color: #56baed;
+  border: none;
+  color: rgb(255, 255, 255);
+  padding: 3% 10%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  cursor: pointer;
+
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+  margin: 5px 20px 40px 20px;
+
+  /*duracion de cuanto dura el login en hacer la transition*/
+  /* -webkit-transition: all 0.8s ease-in-out;   
+      -moz-transition: all 0.8s ease-in-out;
+      -ms-transition: all 0.8s ease-in-out;
+      -o-transition: all 0.8s ease-in-out;
+      transition: all 0.8s ease-in-out;*/
+}
+
+input[type=button]:hover,
+input[type=submit]:hover,
+input[type=reset]:hover {
+  background-color: #39ace7;
+}
+
+input[type=button]:active,
+input[type=submit]:active,
+input[type=reset]:active {
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+/*estilos de los inputs del login*/
+/*estilos del focus en los inputs*/
+input[type=text],
+input[type=password],
+input[type=email] {
+  background-color: #dedede;
+  border: none;
+  color: #0d0d0d;
+  padding: 3.5% 10%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 2px solid #ececec;
+  transition: all 0.5s ease-in-out;
+  border-radius: 5px;
+  border-radius: 20px;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #5fbae9;
+}
+
+input[type=text]::placeholder,
+input[type=password]::placeholder,
+input[type=email]::placeholder {
+  color: #b0b0b0;
+}
+
+
+
+/* ANIMATIONS */
+/* Simple CSS3 Fade-in-down Animation */
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/*=======Estilos para que los input tengan animacione de opacidad========*/
+.fadeIn {
+  /*opacidad de los input del login*/
+
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-duration: 0.3s;
+  /*duracion de los inputs*/
+  -moz-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+}
+
+.fadeIn.first {
+  -webkit-animation-delay: 0.3s;
+  -moz-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+.fadeIn.second {
+  -webkit-animation-delay: 0.3s;
+  -moz-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+.fadeIn.third {
+  -webkit-animation-delay: 0.3s;
+  -moz-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+.fadeIn.fourth {
+  -webkit-animation-delay: 0.3s;
+  -moz-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+/*==========================================================*/
+
+/*animaciones hover*/
+/*estilos de los links de registro y iniciar sesion en el login*/
+.underlineHover,
+.underlineHover2 {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.underlineHover::after,
+.underlineHover2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: #5fbae9;
+  transition: width 0.2s;
+}
+
+.underlineHover:hover,
+.underlineHover2:hover {
+  color: #838383;
+}
+
+.underlineHover:hover::after,
+.underlineHover2:hover::after {
+  width: 100%;
+}
