@@ -17,5 +17,8 @@ class cdashboard extends CI_Controller {
 	
 		
 	}
+	public function listdatacalendar(){
+
+	}
 }
 ?>
