@@ -30,8 +30,8 @@ class Cpaciente extends CI_Controller
 
 		$data = array(
 			
-			'tipo_documentocombo' => $this->mcombo->mcombotable('tipo_documento'),
-			'tipo_pacientecombo' => $this->mcombo->mcombotable('tipo_paciente'),
+			'eps_pacientecombo' => $this->mcombo->mcombotable('eps'),
+			'tipo_regimencombo' => $this->mcombo->mcombotable('tipo_regimen'),
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
@@ -41,36 +41,30 @@ class Cpaciente extends CI_Controller
 	}
 	public function cinsert()
 	{
-		$idtipo_documento = $this->input->post('txttipo_documento');
-		$idtipo_paciente = $this->input->post('txttipo_paciente');
-		$codigo = $this->input->post('txtcodigo');
-		$nombre = $this->input->post('txtnombre');
-		$direccion = $this->input->post('txtdireccion');
-		$telefono = $this->input->post('txttelefono');
-		//validaciones
-		// $this->form_validation->set_rules('txtcodigo', 'el código', 'required|is_unique[paciente.codigo]');
-		// $this->form_validation->set_rules('txttelefono', 'Telefono', 'required');
+		
+		$idpaciente = $this->input->post('txtidpaciente');
+$nombre = $this->input->post('txtnombre'); // Cambio aquí
+$apellido = $this->input->post('txtapellido'); // Cambio aquí
+$documento = $this->input->post('txtdocumento'); // Si este campo también se ha cambiado, actualízalo en el formulario
+$telefono = $this->input->post('txttelefono');
+$eps_id = $this->input->post('txteps'); // Asegúrate de que este campo exista en el formulario
+$regimen = $this->input->post('txtregimen');
 
-		// if ($this->form_validation->run()) {
-			// $data = array(
-			// 	'idtipo_documento' => $idtipo_documento,
-			// 	'idtipo_paciente'   => $idtipo_paciente,
-			// 	'codigo' 		   => $codigo,
-			// 	'nombre'			=> $nombre,
-			// 	'direccion' => $direccion,
-			// 	'telefono'=> $telefono,
-			// 	'estado' => '1',
-			// 	'idcomercio' => $this->session->userdata('idcomercio'),
-			// );
+$data = array(
+	'paciente_id' => $idpaciente,
+	'nombres_paciente' => $nombre,
+	'apellidos_paciente'   => $apellido,
+	'documento_paciente' => $documento,
+	'telefono_paciente'=> $telefono,
+	'eps_paciente'=> $eps_id,
+	'tipo_paciente'=> $regimen,
+	
+);
 			$res = $this->mpaciente->minsertpaciente($data);
 			if ($res) {
 				$this->session->set_flashdata('success', 'Guardo Correctamente');
 				redirect(base_url() . 'mantenimiento/cpaciente');
-			// } else {
-			// 	$this->session->set_flashdata('error', 'Se no Guardó Registro');
-			// 	redirect(base_url() . 'mantenimiento/cpaciente/cadd');
-
-			// }
+			
 		} else {
 			$this->session->set_flashdata('error', 'No se puedo guardar la paciente');
 			$this->cadd();
