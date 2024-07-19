@@ -77,8 +77,7 @@ $data = array(
 
 		$data = array(
 			'usuariosedit' => $this->musuarios->miupdateusuarios($idusuarios),
-			'eps_usuarioscombo' => $this->mcombo->mcombotable('eps'),
-			'tipo_regimencombo' => $this->mcombo->mcombotable('tipo_regimen'),
+			'tipo_usuariocombo' => $this->mcombo->mcombotable('tipo_usuario'),
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
