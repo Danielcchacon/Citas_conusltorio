@@ -7,7 +7,7 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="build/images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="<?php echo base_url(); ?>assets/149071.png" alt="..." class="img-circle profile_img">
             </div>
             <div class="profile_info">
                 <span>Bienvenido,</span>
@@ -53,11 +53,11 @@
                         
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                        <form id="logoutForm" action="<?php echo base_url(); ?>clogout()" method="post">
-                            <button type="button" id="logoutButton" class="sidebar-button" data-toggle="tooltip" data-placement="top" title="Logout">
+
+                            <a href="<?php echo base_url();?>clogin/clogout"></a>></a>
                                 <span class=" dropdown-item fa fa-sign-out pull-right" aria-hidden="true"> Log out</span>
-                            </button>
-                        </form>
+                        
+                        
                     </div>
                 </li>
                 <li role="presentation" class="nav-item dropdown open">

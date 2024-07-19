@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Ccategoria extends CI_Controller
+class Cusuarios extends CI_Controller
 {
  private $permisos;
 	function __construct()
@@ -10,23 +10,23 @@ class Ccategoria extends CI_Controller
 		if (!$this->session->userdata('login')) {
 			redirect(base_url() . 'clogin');
 		}
-		$this->load->model('mcategoria');
+		$this->load->model('musuarios');
 	}
 	public function index(){
 
 		$data = array(
-			'categoriaindex' => $this->mcategoria->mselectcategoria(),
+			'usuariosindex' => $this->musuarios->mselectusuarios(),
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/categoria/vlist', $data);
+		$this->load->view('admin/usuarios/vlist', $data);
 		$this->load->view('layouts/footer');
 	}
 
-	public function cproductcategoria($idCategoria){
+	public function cproductusuarios($idusuarios){
 
 		$data = array(
-			'categoriaproducto' => $this->mcategoria->mproductcategoria($idCategoria),
+			'usuariosproducto' => $this->musuarios->mproductusuarios($idusuarios),
 		);
 		
 	}
@@ -36,7 +36,7 @@ class Ccategoria extends CI_Controller
 
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/categoria/vadd');
+		$this->load->view('admin/usuarios/vadd');
 		$this->load->view('layouts/footer');
 
 	}
@@ -47,11 +47,11 @@ class Ccategoria extends CI_Controller
 		$descripcion = $this->input->post('txtdescripcion');
 
 		//validaciones
-		// $this->form_validation->set_rules('txtcodigo', 'El código ya existe', 'required|is_unique[categoria.codigo]');
+		// $this->form_validation->set_rules('txtcodigo', 'El código ya existe', 'required|is_unique[usuarios.codigo]');
 		$this->form_validation->set_rules(
 			'txtcodigo',
 			'El código ya existe',
-			'required|is_unique[categoria.codigo]',
+			'required|is_unique[usuarios.codigo]',
 			array('is_unique' => 'El código ya existe debe ser un valor único.')
 		);
 		
@@ -65,17 +65,17 @@ class Ccategoria extends CI_Controller
 				'idcomercio'=>$this->session->userdata('idcomercio'),
 				
 			);
-			$res = $this->mcategoria->minsertcategoria($data);
+			$res = $this->musuarios->minsertusuarios($data);
 			if ($res) {
 				$this->session->set_flashdata('success', 'Guardo Correctamente');
-				redirect(base_url() . 'mantenimiento/ccategoria');
+				redirect(base_url() . 'mantenimiento/cusuarios');
 			} else {
 				$this->session->set_flashdata('error', 'Se no Guardó Registro');
-				redirect(base_url() . 'mantenimiento/ccategoria/cadd');
+				redirect(base_url() . 'mantenimiento/cusuarios/cadd');
 
 			}
 		} else {
-			$this->session->set_flashdata('error', 'No se puedo guardar la categoria');
+			$this->session->set_flashdata('error', 'No se puedo guardar la usuarios');
 			$this->cadd();
 		}
 
@@ -83,35 +83,35 @@ class Ccategoria extends CI_Controller
 
 	}
 
-	public function cedit($idcategoria){
+	public function cedit($idusuarios){
 
 		$data = array(
-			'categoriaedit' => $this->mcategoria->miupdatecategoria($idcategoria),
+			'usuariosedit' => $this->musuarios->miupdateusuarios($idusuarios),
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/categoria/vedit', $data);
+		$this->load->view('admin/usuarios/vedit', $data);
 		$this->load->view('layouts/footer');
 	}
 
 	public function cupdate(){
 
-		$idcategoria = $this->input->post('txtidcategoria');
+		$idusuarios = $this->input->post('txtidusuarios');
 		$codigo = $this->input->post('txtcodigo');
 		$nombre = $this->input->post('txtnombre');
 		$descripcion = $this->input->post('txtdescripcion');
 		$estado = $this->input->post('txtestado');
 
-		$categoriaActual = $this->mcategoria->miupdatecategoria($idcategoria);
-		// var_dump($categoriaActual);
+		$usuariosActual = $this->musuarios->miupdateusuarios($idusuarios);
+		// var_dump($usuariosActual);
 
 
 
-		if ($codigo == $categoriaActual->codigo) {
+		if ($codigo == $usuariosActual->codigo) {
 			$unique = '';
 		} else {
 
-			$unique = '|is_unique[categoria.codigo]';
+			$unique = '|is_unique[usuarios.codigo]';
 		}
 		$this->form_validation->set_rules('txtcodigo', 'codigo', 'required' . $unique);
 
@@ -123,28 +123,28 @@ class Ccategoria extends CI_Controller
 				'estado' => $estado,
 				// 'idcomercio' =>
 			);
-			$res = $this->mcategoria->mupdatecategoria($idcategoria, $data);
+			$res = $this->musuarios->mupdateusuarios($idusuarios, $data);
 
 			if ($res) {
 				$this->session->set_flashdata('success', 'Se Guardó Correctamente');
-				redirect(base_url() . '/mantenimiento/ccategoria');
+				redirect(base_url() . '/mantenimiento/cusuarios');
 			} else {
 
-				$this->session->set_flashdata('error', 'No se puedo Actulizar la Categoria ');
-				redirect(base_url() . '/mantenimiento/ccategoria/cedit' . $idcategoria);
+				$this->session->set_flashdata('error', 'No se puedo Actulizar la usuarios ');
+				redirect(base_url() . '/mantenimiento/usuarios/cedit' . $idusuarios);
 			}
 		} else {
-			$this->session->set_flashdata('error', 'No se pudo guardar la Categoria ');
-			$this->cedit($idcategoria);
+			$this->session->set_flashdata('error', 'No se pudo guardar la usuarios ');
+			$this->cedit($idusuarios);
 
 
 		}
 	}
 	//DELETE 
-	public function cdelete($idCategoria){
-		$this->mcategoria->mdeletecategoria($idCategoria);
+	public function cdelete($idusuarios){
+		$this->musuarios->mdeleteusuarios($idusuarios);
 		
-		echo "ccategoria";
+		echo "cusuarios";
 	}
 }
 ?>
