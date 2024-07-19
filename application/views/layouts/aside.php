@@ -33,7 +33,7 @@
     <li>
         <a href="#"><i class="fa fa-shield"></i> Seguridad <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-            <li><a href="?page=users/list">Gestión de Usuarios</a></li>
+            <li><a href="<?php echo base_url(); ?>mantenimiento/cusuarios">Gestión de Usuarios</a></li>
             <li><a href="fixed_footer.html">Cambiar Contraseña</a></li>
         </ul>
     </li>

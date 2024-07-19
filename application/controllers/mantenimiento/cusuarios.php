@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Cpaciente extends CI_Controller
+class Cusuarios extends CI_Controller
 {
 
 	function __construct()
@@ -10,18 +10,18 @@ class Cpaciente extends CI_Controller
 		if (!$this->session->userdata('login')) {
 			redirect(base_url() . 'clogin');
 		}
-		$this->load->model('mpaciente');
+		$this->load->model('musuarios');
 		$this->load->model('mcombo');
 	}
 	public function index()
 	{
 		$data = array(
-			'pacienteindex' => $this->mpaciente->mselectpaciente(),
+			'usuariosindex' => $this->musuarios->mselectusuarios(),
 			
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/paciente/vlist', $data);
+		$this->load->view('admin/usuarios/vlist', $data);
 		$this->load->view('layouts/footer');
 	}
 	//insert
@@ -30,19 +30,19 @@ class Cpaciente extends CI_Controller
 
 		$data = array(
 			
-			'eps_pacientecombo' => $this->mcombo->mcombotable('eps'),
+			'eps_usuarioscombo' => $this->mcombo->mcombotable('eps'),
 			'tipo_regimencombo' => $this->mcombo->mcombotable('tipo_regimen'),
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/paciente/vadd',$data);
+		$this->load->view('admin/usuarios/vadd',$data);
 		$this->load->view('layouts/footer');
 
 	}
 	public function cinsert()
 	{
 		
-		$idpaciente = $this->input->post('txtidpaciente');
+		$idusuarios = $this->input->post('txtidusuarios');
 $nombre = $this->input->post('txtnombre'); // Cambio aquí
 $apellido = $this->input->post('txtapellido'); // Cambio aquí
 $documento = $this->input->post('txtdocumento'); // Si este campo también se ha cambiado, actualízalo en el formulario
@@ -51,45 +51,45 @@ $eps_id = $this->input->post('txteps'); // Asegúrate de que este campo exista e
 $regimen = $this->input->post('txtregimen');
 
 $data = array(
-	'paciente_id' => $idpaciente,
-	'nombres_paciente' => $nombre,
-	'apellidos_paciente'   => $apellido,
-	'documento_paciente' => $documento,
-	'telefono_paciente'=> $telefono,
-	'eps_paciente'=> $eps_id,
-	'tipo_paciente'=> $regimen,
+	'usuarios_id' => $idusuarios,
+	'nombres_usuarios' => $nombre,
+	'apellidos_usuarios'   => $apellido,
+	'documento_usuarios' => $documento,
+	'telefono_usuarios'=> $telefono,
+	'eps_usuarios'=> $eps_id,
+	'tipo_usuarios'=> $regimen,
 	
 );
-			$res = $this->mpaciente->minsertpaciente($data);
+			$res = $this->musuarios->minsertusuarios($data);
 			if ($res) {
 				$this->session->set_flashdata('success', 'Guardo Correctamente');
-				redirect(base_url() . 'mantenimiento/cpaciente');
+				redirect(base_url() . 'mantenimiento/cusuarios');
 			
 		} else {
-			$this->session->set_flashdata('error', 'No se puedo guardar la paciente');
+			$this->session->set_flashdata('error', 'No se puedo guardar la usuarios');
 			$this->cadd();
 		}
 
 
 	}
 
-	public function cedit($idpaciente){
+	public function cedit($idusuarios){
 
 		$data = array(
-			'pacienteedit' => $this->mpaciente->miupdatepaciente($idpaciente),
-			'eps_pacientecombo' => $this->mcombo->mcombotable('eps'),
+			'usuariosedit' => $this->musuarios->miupdateusuarios($idusuarios),
+			'eps_usuarioscombo' => $this->mcombo->mcombotable('eps'),
 			'tipo_regimencombo' => $this->mcombo->mcombotable('tipo_regimen'),
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/paciente/vedit', $data);
+		$this->load->view('admin/usuarios/vedit', $data);
 		$this->load->view('layouts/footer');
 
 	}
 
 	public function cupdate(){
 
-		$idpaciente = $this->input->post('txtidpaciente');
+		$idusuarios = $this->input->post('txtidusuarios');
 $nombre = $this->input->post('txtnombre'); // Cambio aquí
 $apellido = $this->input->post('txtapellido'); // Cambio aquí
 $documento = $this->input->post('txtdocumento'); // Si este campo también se ha cambiado, actualízalo en el formulario
@@ -97,57 +97,57 @@ $telefono = $this->input->post('txttelefono');
 $eps_id = $this->input->post('txteps'); // Asegúrate de que este campo exista en el formulario
 $regimen = $this->input->post('txtregimen');
 
-		$pacienteActual = $this->mpaciente->miupdatepaciente($idpaciente);
-		// var_dump($pacienteActual);
-		// if ($codigo == $pacienteActual->codigo) {
+		$usuariosActual = $this->musuarios->miupdateusuarios($idusuarios);
+		// var_dump($usuariosActual);
+		// if ($codigo == $usuariosActual->codigo) {
 		// 	$unique = '';
 		// } else {
 
-		// 	$unique = '|is_unique[paciente.codigo]';
+		// 	$unique = '|is_unique[usuarios.codigo]';
 		// }
 		// $this->form_validation->set_rules('txtcodigo', 'codigo', 'required' . $unique);
 
 		// if ($this->form_validation->run()) {
 			$data = array(
-				'paciente_id' => $idpaciente,
-				'nombres_paciente' => $nombre,
-				'apellidos_paciente'   => $apellido,
-				'documento_paciente' => $documento,
-				'telefono_paciente'=> $telefono,
-				'eps_paciente'=> $eps_id,
-				'tipo_paciente'=> $regimen,
+				'usuarios_id' => $idusuarios,
+				'nombres_usuarios' => $nombre,
+				'apellidos_usuarios'   => $apellido,
+				'documento_usuarios' => $documento,
+				'telefono_usuarios'=> $telefono,
+				'eps_usuarios'=> $eps_id,
+				'tipo_usuarios'=> $regimen,
 			);
-			$res = $this->mpaciente->mupdatepaciente($idpaciente, $data);
+			$res = $this->musuarios->mupdateusuarios($idusuarios, $data);
 
 			if ($res) {
 				$this->session->set_flashdata('success', 'Se Guardó Correctamente');
-				redirect(base_url() . '/mantenimiento/cpaciente');
+				redirect(base_url() . '/mantenimiento/cusuarios');
 			} else {
 
-				$this->session->set_flashdata('error', 'No se puedo Actulizar la paciente ');
-				redirect(base_url() . '/mantenimiento/cpaciente/cedit' . $idpaciente);
+				$this->session->set_flashdata('error', 'No se puedo Actulizar la usuarios ');
+				redirect(base_url() . '/mantenimiento/cusuarios/cedit' . $idusuarios);
 			}
 		// } else {
-		// 	$this->session->set_flashdata('error', 'No se pudo guardar la paciente ');
-		// 	$this->cedit($idpaciente);
+		// 	$this->session->set_flashdata('error', 'No se pudo guardar la usuarios ');
+		// 	$this->cedit($idusuarios);
 
 
 		// }
 	}
 	//DELETE 
-	// public function cdelete($idpaciente){
-	// 	$this->mpaciente->mdeletepaciente($idpaciente);
-	// 	redirect(base_url() . "mantenimiento/cpaciente");
+	// public function cdelete($idusuarios){
+	// 	$this->musuarios->mdeleteusuarios($idusuarios);
+	// 	redirect(base_url() . "mantenimiento/cusuarios");
 	// }
 
-	public function cdelete($idpaciente) {
+	public function cdelete($idusuarios) {
 		try {
-			$this->mpaciente->mdeletepaciente($idpaciente);
-			echo "cpaciente";
+			$this->musuarios->mdeleteusuarios($idusuarios);
+			echo "cusuarios";
 		} catch (\Exception $e) {
 			// Captura la excepción y muestra un mensaje específico
 			if ($e->errorInfo[1] == 1451) {
-				echo "No se puede eliminar el paciente. Está asociado a productos.";
+				echo "No se puede eliminar el usuarios. Está asociado a productos.";
 			} else {
 				echo "Error: " . $e->getMessage();
 			}
