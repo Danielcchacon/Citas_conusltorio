@@ -22,9 +22,7 @@ class Mcombo extends CI_Model {
         return $resultado->result();
     }
     public function mcombotable($tabla) {
-        
-        $this ->db->where('estado <=','1');
-        $this->db->where('idcomercio', $this->session->userdata('idcomercio'));
+
         $resultado = $this->db->get($tabla);
         return $resultado->result();
     }

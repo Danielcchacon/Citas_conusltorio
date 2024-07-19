@@ -7,11 +7,13 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="<?php echo base_url(); ?>assets/149071.png" alt="..." class="img-circle profile_img">
+                <img src="<?php echo base_url();?>assets/149071.png" alt="..." class="img-circle profile_img">
+               
             </div>
             <div class="profile_info">
                 <span>Bienvenido,</span>
-                <h2>Guest</h2>
+                <h2><?php echo $this->session->userdata('login'); ?></h2>
+
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -20,20 +22,23 @@
             <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                    <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="?page=home">Asignar Consulta</a></li>
-                            <li><a href="?page=pacientes/list">Pacientes</a></li>
-                            <li><a href="index3.html"></a></li>
-                        </ul>
-                    </li>
-                    <li><a><i class="fa fa-shield"></i>Seguridad <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="?page=users/list">Gestión de Usuarios</a></li>
-                            <li><a href="fixed_footer.html">Cambiar Contraseña</a></li>
-                        </ul>
-                    </li>
-                </ul>
+    <li>
+        <a href="#"><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+            <li><a href="<?php echo base_url(); ?>cdashboard">Asignar Consulta</a></li>
+            <li><a href="<?php echo base_url(); ?>mantenimiento/cpaciente">Pacientes</a></li>
+            <li><a href="index3.html">Historia Clínica</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-shield"></i> Seguridad <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+            <li><a href="?page=users/list">Gestión de Usuarios</a></li>
+            <li><a href="fixed_footer.html">Cambiar Contraseña</a></li>
+        </ul>
+    </li>
+</ul>
+
             </div>
         </div>
         <!-- /menu footer buttons -->
@@ -49,15 +54,13 @@
             <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src="<?php echo base_url(); ?>assets/149071.png" alt="">
+                        <img src="<?php echo base_url();?>assets/149071.png" alt="">
                         
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-
-                            <a href="<?php echo base_url();?>clogin/clogout"></a>></a>
-                                <span class=" dropdown-item fa fa-sign-out pull-right" aria-hidden="true"> Log out</span>
-                        
-                        
+                    <a class="dropdown-item" href="<?php echo base_url();?>clogin/clogout">
+                        <i class="fa fa-sign-out"></i> Cerrar sesión
+                    </a>
                     </div>
                 </li>
                 <li role="presentation" class="nav-item dropdown open">

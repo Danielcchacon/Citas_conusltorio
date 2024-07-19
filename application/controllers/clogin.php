@@ -17,17 +17,18 @@ public function clogeo(){
  $txtpass = $this ->input->post("txtpass");
 
  $res = $this->musuario->mlogeo($txtnombre,$txtpass);
- 
+ echo $res;
 if(!$res){
 $this->session ->set_flashdata("error","El Usuario y/O constraseña son incorrectas");
 redirect(base_url().'clogin');
 }else{
    
 $data =array(
-    'usuario_id' => $res->usuario_id,
-    'nombres_usuario'    => $res->nombres_usuario,
-    'apellidos_usuario'      => $res->apellidos_usuario,
-    'tipo_usuario'     => $res->tipo_usuario
+    'nombres_usuario' => $res->nombres_usuario,
+    'apellidos_usuario'    => $res->apellidos_usuario,
+    'correo_usuario'      => $res->correo_usuario,
+    'tipo_usuario'     => $res->tipo_usuario,
+    'login'     => TRUE,
 
 );
 echo $this->session->set_userdata($data);
