@@ -1,5 +1,4 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
 class cdashboard extends CI_Controller {
 	public function __construct() {
@@ -17,7 +16,7 @@ class cdashboard extends CI_Controller {
 			'citasindex' => $this->mdashboard->mselectdashboard(),
 			'medicocombo' => $this->mcombo->mcombotable('medico'),
 			'pacientecombo' => $this->mcombo->mcombotable('paciente'),
-			'' => $this->mcombo->mcombotable('paciente'),
+			'tipodeconsulta' => $this->mcombo->mcombotable('tipo_consulta'),
 
 			
 		);
@@ -34,6 +33,11 @@ class cdashboard extends CI_Controller {
 		$id_paciente = $this->input->post('id_paciente');
 		$id_tipo_consulta = $this->input->post('id_tipo_consulta');
 		$horayfecha = $this->input->post('horayfecha');
+
+		log_message('info', 'Medico ID: ' . $id_medico);
+        log_message('info', 'Paciente ID: ' . $id_paciente);
+        log_message('info', 'Tipo de Consulta ID: ' . $id_tipo_consulta);
+        log_message('info', 'Fecha y Hora: ' . $horayfecha);
 		$result = $this->mdashboard->minsertcita($id_medico, $id_paciente, $id_tipo_consulta, $horayfecha);
 	
 		// Check result and perform necessary actions

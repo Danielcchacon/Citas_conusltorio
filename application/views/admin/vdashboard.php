@@ -76,64 +76,65 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">
-          <form action="<?php echo base_url(); ?>cdashboard/caddcita" method="POST">
-            <div class="form-group">
-              <p id="selectedDate"></p>
-            </div>
-            
-           
-            
-            <div class="form-group <?php echo !empty(form_error('txtregimen')) ? 'has-erro' : ''; ?>">
-                                <label for="txtregimen">Medico </label>
-                                <select name="txtregimen" id="txtregimen" class="form-control selectpicker" data-live-search="true">
-                                    <option value=' '>Seleccione Medico</option>
-                                    <?php foreach ($tipo_regimencombo as $atributos): ?>
-                                        <?php if($atributos->tipo_regimen_id == $pacienteedit->tipo_paciente): ?>
-                                        <option value="<?php echo $atributos->tipo_regimen_id ?>"selected><?php echo $atributos->descripcion_tipo_regimen ?></option>
-                                        <?php else: ?>
-                                        <option value="<?php echo $atributos->tipo_regimen_id ?>"><?php echo $atributos->descripcion_tipo_regimen ?></option>
-                                    <?php endif ?>
-                                    <?php endforeach ?>
-                                </select>
-                            </div> <div class="form-group <?php echo !empty(form_error('txtregimen')) ? 'has-erro' : ''; ?>">
-                                <label for="txtregimen">Paciente</label>
-                                <select name="txtregimen" id="txtregimen" class="form-control selectpicker" data-live-search="true">
-                                    <option value=' '>Seleccione Paciente</option>
-                                    <?php foreach ($tipo_regimencombo as $atributos): ?>
-                                        <?php if($atributos->tipo_regimen_id == $pacienteedit->tipo_paciente): ?>
-                                        <option value="<?php echo $atributos->tipo_regimen_id ?>"selected><?php echo $atributos->descripcion_tipo_regimen ?></option>
-                                        <?php else: ?>
-                                        <option value="<?php echo $atributos->tipo_regimen_id ?>"><?php echo $atributos->descripcion_tipo_regimen ?></option>
-                                    <?php endif ?>
-                                    <?php endforeach ?>
-                                </select>
-                            </div> 
-                            <div class="form-group <?php echo !empty(form_error('txtregimen')) ? 'has-erro' : ''; ?>">
-                                <label for="txtregimen">Tipo de consulta</label>
-                                <select name="txtregimen" id="txtregimen" class="form-control selectpicker" data-live-search="true">
-                                    <option value=' '>Seleccione Tipo de consulta</option>
-                                    <?php foreach ($tipo_regimencombo as $atributos): ?>
-                                        <?php if($atributos->tipo_regimen_id == $pacienteedit->tipo_paciente): ?>
-                                        <option value="<?php echo $atributos->tipo_regimen_id ?>"selected><?php echo $atributos->descripcion_tipo_regimen ?></option>
-                                        <?php else: ?>
-                                        <option value="<?php echo $atributos->tipo_regimen_id ?>"><?php echo $atributos->descripcion_tipo_regimen ?></option>
-                                    <?php endif ?>
-                                    <?php endforeach ?>
-                                </select>
-                            </div>
+        
 
-                            <div class="form-group">
-  <label for="hora">Seleccionar Hora:</label>
-  <input type="time" class="form-control" id="hora" name="hora">
+        <div class="modal-body">
+  <form id="citaForm"  action="<?php echo base_url(); ?>cdashboard/caddcita" method="POST">
+    <input type="hidden" name="fecha_hora" id="fecha_hora"> <!-- Campo oculto para fecha y hora combinadas -->
+
+    <div class="form-group">
+      <p id="selectedDate"></p>
+    </div>
+    
+    <div class="form-group" id="fecha-group">
+      <label for="fecha">Seleccionar Fecha:</label>
+      <input type="date" class="form-control" id="fecha" name="fecha" readonly>
+    </div>
+
+    <div class="form-group" id="hora-group">
+      <label for="hora">Seleccionar Hora:</label>
+      <input type="time" class="form-control" id="hora" name="hora" >
+    </div>
+
+    <div class="form-group <?php echo !empty(form_error('txtmedico')) ? 'has-error' : ''; ?>">
+      <label for="txtmedico">Médico</label>
+      <select name="txtmedico" id="txtmedico" class="form-control selectpicker" data-live-search="true">
+        <option value="">Seleccione Médico</option>
+        <?php foreach ($medicocombo as $atributos): ?>
+          <option value="<?php echo $atributos->medico_id ?>"><?php echo $atributos->nombres_medico . " " . $atributos->apellidos_medico ?></option>
+        <?php endforeach ?>
+      </select>
+    </div>
+
+    <div class="form-group <?php echo !empty(form_error('txtpaciente')) ? 'has-error' : ''; ?>">
+      <label for="txtpaciente">Paciente</label>
+      <select name="txtpaciente" id="txtpaciente" class="form-control selectpicker" data-live-search="true">
+        <option value="">Seleccione Paciente</option>
+        <?php foreach ($pacientecombo as $atributos): ?>
+          <option value="<?php echo $atributos->paciente_id ?>"><?php echo $atributos->nombres_paciente . " " . $atributos->apellidos_paciente ?></option>
+        <?php endforeach ?>
+      </select>
+    </div>
+
+    <div class="form-group <?php echo !empty(form_error('txtconsulta')) ? 'has-error' : ''; ?>">
+      <label for="txtconsulta">Tipo de Consulta</label>
+      <select name="txtconsulta" id="txtconsulta" class="form-control selectpicker" data-live-search="true">
+        <option value="0">Seleccione Tipo de Consulta</option>
+        <?php foreach ($tipodeconsulta as $atributos): ?>
+          <option value="<?php echo $atributos->tipo_consulta_id ?>"><?php echo $atributos->descripcion_tipo_consulta ?></option>
+        <?php endforeach ?>
+      </select>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="colordefault btn btn-primary">Agregar Cita</button>
+      <button type="button" class="btn btn-secondary" onclick="CerrarModal()" data-dismiss="modal">Cerrar</button>
+    </div>
+  </form>
 </div>
 
-            <div class="modal-footer">
-              <button type="submit" class="colordefault btn btn-primary">Agregar Cita</button>
-              <button type="button" class="btn btn-secondary" onclick="CerrarModal()" data-dismiss="modal">Cerrar</button>
-            </div>
-          </form>
-        </div>
+
+
       </div>
     </div>
   </div>
@@ -148,13 +149,20 @@
       initialView: 'dayGridMonth',
       locale: 'es',
       headerToolbar: {
-        left: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+        left: 'dayGridMonth,listWeek',
         center: 'title',
         right: 'prev,next today'
       },
       dateClick: function(info) {
         // Mostrar la fecha seleccionada en el modal
         document.getElementById('selectedDate').innerText = 'Fecha seleccionada: ' + info.dateStr;
+
+        // Establecer el valor de la fecha seleccionada en el campo de fecha
+        document.getElementById('fecha').value = info.dateStr;
+
+    
+
+   
 
         // Abrir el modal
         $('#dateModal').modal('show');
@@ -173,4 +181,72 @@
   function CerrarModal() {
     $('#dateModal').modal('hide');
   }
+
+  document.getElementById('citaForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevenir el envío del formulario
+    var fecha = document.getElementById('fecha').value;
+    var hora = document.getElementById('hora').value;
+
+    var hora_fecha = document.getElementById('fecha_hora').value;
+    var medico = document.getElementById('txtmedico').value;
+    var paciente = document.getElementById('txtpaciente').value;
+    var tipoConsulta = document.getElementById('txtconsulta').value;
+
+    if (!fecha) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor seleccione una fecha.',
+        icon: 'error',
+        timer: 3000
+      });
+      return;
+    }
+
+    if (!hora) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor seleccione una hora.',
+        icon: 'error',
+        timer: 3000
+      });
+      return;
+    }
+
+    if (!medico) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor seleccione un médico.',
+        icon: 'error',
+        timer: 3000
+      });
+      return;
+    }
+
+    if (!paciente) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor seleccione un paciente.',
+        icon: 'error',
+        timer: 3000
+      });
+      return;
+    }
+
+    if (!tipoConsulta) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor seleccione un tipo de consulta.',
+        icon: 'error',
+        timer: 3000
+      });
+      return;
+    }
+
+    var fechaHora = fecha + ' ' + hora + ':00'; // Combinar fecha y hora
+    document.getElementById('fecha_hora').value = fechaHora;
+
+    // Si todo está correcto, envía el formulario
+    this.submit();
+  });
 </script>
+
