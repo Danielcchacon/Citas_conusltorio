@@ -7,6 +7,7 @@ class cdashboard extends CI_Controller {
 	if(!$this->session->userdata('login')){
 		redirect(base_url().'clogin');
 	 } 
+	 $this->load->model('mdashboard');
 	}
 	public function index()
 	{
@@ -18,6 +19,21 @@ class cdashboard extends CI_Controller {
 		
 	}
 	public function listdatacalendar(){
+
+	}
+	public function addcita(){
+$id_medico =$this->input->post('');
+$id_paciente = $this->input->post('');
+
+$data = array(
+
+
+);
+
+$citas = $this->mdashboard->minsertcita();
+
+
+
 
 	}
 }

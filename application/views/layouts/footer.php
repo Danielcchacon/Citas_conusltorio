@@ -53,22 +53,49 @@
 <!-- Tempus Dominus JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.0.0-beta.6/dist/js/tempus-dominus.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            locale: 'es',
-            headerToolbar: {
-                left: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-                center: 'title',
-                right: 'prev,next today'
-            },
-            dateClick: function(info) {
-                alert('Fecha seleccionada: ' + info.dateStr);
-            }
+  document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                    center: 'title',
+                    right: 'prev,next today'
+                },
+                dateClick: function(info) {
+                    // Mostrar la fecha seleccionada en el modal
+                    document.getElementById('selectedDate').innerText = 'Fecha seleccionada: ' + info.dateStr;
+
+                    // Abrir el modal
+                    var modal = document.getElementById('dateModal');
+                    modal.classList.add('show');
+                    modal.style.display = 'block';
+                    modal.setAttribute('aria-hidden', 'false');
+                    document.body.classList.add('modal-open');
+
+                    var modalBackdrop = document.createElement('div');
+                    modalBackdrop.className = 'modal-backdrop fade show';
+                    document.body.appendChild(modalBackdrop);
+                }
+            });
+            calendar.render();
         });
-        calendar.render();
-    });
+
+   
+        function CerrarModal(){
+            var modal = document.getElementById('dateModal');
+            modal.classList.remove('show');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+
+
+            var modalBackdrop = document.querySelector('.modal-backdrop');
+            if (modalBackdrop) {
+                document.body.removeChild(modalBackdrop);
+            }
+        }
 </script>
 </body>
 </html>
