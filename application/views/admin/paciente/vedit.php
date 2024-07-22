@@ -53,7 +53,15 @@
                                     onblur="this.value=this.value.toUpperCase();">
                                 <?php echo form_error('txtdocumento', '<div class="invalid-feedback">', '</div>') ?>
                             </div>
-                            
+
+                            <div class="form-group <?php echo !empty(form_error('txtcorreo')) ? 'is-invalid' : ''; ?>">
+                                <label for="txtcorreo">Correo </label>
+                                <input type="text" id="txtcorreo" name="txtcorreo" class="form-control"
+                                    value="<?php echo !empty(form_error('txtcorreo')) ? set_value('txtcorreo') : $pacienteedit->correo_paciente ?>"
+                                    onblur="this.value=this.value.toUpperCase();">
+                                <?php echo form_error('txtcorreo', '<div class="invalid-feedback">', '</div>') ?>
+                            </div>
+
                             <div class="form-group <?php echo !empty(form_error('txttelefono')) ? 'is-invalid' : ''; ?>">
                                 <label for="txttelefono">Telefono </label>
                                 <input type="text" id="txttelefono" name="txttelefono" class="form-control"

@@ -47,6 +47,8 @@ $nombre = $this->input->post('txtnombre'); // Cambio aquí
 $apellido = $this->input->post('txtapellido'); // Cambio aquí
 $documento = $this->input->post('txtdocumento'); // Si este campo también se ha cambiado, actualízalo en el formulario
 $telefono = $this->input->post('txttelefono');
+$correo = $this->input->post('txtcorreo'); // Si este campo también se ha cambiado, actualízalo en el formulario
+
 $eps_id = $this->input->post('txteps'); // Asegúrate de que este campo exista en el formulario
 $regimen = $this->input->post('txtregimen');
 
@@ -56,6 +58,7 @@ $data = array(
 	'apellidos_paciente'   => $apellido,
 	'documento_paciente' => $documento,
 	'telefono_paciente'=> $telefono,
+	'correo_paciente'=>$correo,
 	'eps_paciente'=> $eps_id,
 	'tipo_paciente'=> $regimen,
 	
@@ -94,6 +97,8 @@ $nombre = $this->input->post('txtnombre'); // Cambio aquí
 $apellido = $this->input->post('txtapellido'); // Cambio aquí
 $documento = $this->input->post('txtdocumento'); // Si este campo también se ha cambiado, actualízalo en el formulario
 $telefono = $this->input->post('txttelefono');
+$correo = $this->input->post('txtcorreo');
+
 $eps_id = $this->input->post('txteps'); // Asegúrate de que este campo exista en el formulario
 $regimen = $this->input->post('txtregimen');
 
@@ -113,6 +118,7 @@ $regimen = $this->input->post('txtregimen');
 				'nombres_paciente' => $nombre,
 				'apellidos_paciente'   => $apellido,
 				'documento_paciente' => $documento,
+				'correo_paciente' => $correo,
 				'telefono_paciente'=> $telefono,
 				'eps_paciente'=> $eps_id,
 				'tipo_paciente'=> $regimen,

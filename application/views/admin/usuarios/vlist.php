@@ -37,7 +37,6 @@
                                     <th>Correo</th>
                                     <th>Teléfono</th>
                                     <th>Tipo Usuario</th>
-                                    <th>Estado</th>
                                     <th>Fecha</th>
                                     <th>Opciones</th>
                                 </tr>
@@ -53,7 +52,6 @@
                                             <td><?php echo $atributos->correo_usuario; ?></td>
                                             <td><?php echo $atributos->telefono_usuario; ?></td>
                                             <td><?php echo $atributos->descripcion_tipo_usuario; ?></td>
-                                            <td><?php echo $atributos->estado_usuario; ?></td>
                                             <td><?php echo $atributos->fecha_usuario; ?></td>
                                             <?php $data = $atributos->usuario_id . "*" . $atributos->nombres_usuario . "*" . $atributos->apellidos_usuario . "*" . $atributos->documento_usuario; ?>
                                             <td>

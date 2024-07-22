@@ -4,7 +4,8 @@ class Mdashboard  extends CI_Model  {
         $this->db->select('
             c.fecha_consulta,
             p.nombres_paciente AS nombre_paciente,
-            m.nombres_medico AS nombre_medico
+            m.nombres_medico AS nombre_medico,
+            p.documento_paciente AS documento
         ');
             $this->db->from('consulta c');
         $this->db->join('paciente p', 'c.paciente_id = p.paciente_id', 'inner');
@@ -26,11 +27,13 @@ class Mdashboard  extends CI_Model  {
 
     public function minsertcita($id_medico, $id_paciente, $id_tipo_consulta, $horayfecha) {
         $sql = "SELECT agregar_consulta(?, ?, ?, ?, '', '', '', '', '') AS result";
-        $query = $this->db->query($sql, array($id_medico, $id_paciente, $id_tipo_consulta, $horayfecha));
+        $query = $this->db->query($sql, array( $id_paciente, $id_tipo_consulta, $id_medico,$horayfecha));
+        log_message('info', 'SQL Query: ' . $sql);
+        log_message('info', 'Parameters: ' . json_encode(array($id_medico, $id_paciente, $id_tipo_consulta, $horayfecha)));
         return $query->row()->result; // Assuming the function returns a single value
     }
     
-    
+  
     public function miupdatedashboard($iddashboard) {
     $this->db->where('dashboard_id',$iddashboard);
     $resultado = $this->db->get('dashboard');

@@ -34,6 +34,11 @@
                                 <input type="text" id="txttelefono" name="txttelefono" class="form-control" onblur="this.value=this.value.toUpperCase();">
                             </div>
 
+                            <div class="form-group">
+                                <label for="txtcorreo">Correo</label>
+                                <input type="text" id="txtcorreo" name="txtcorreo" class="form-control" onblur="this.value=this.value.toUpperCase();">
+                            </div>
+
                             <div class="form-group <?php echo !empty(form_error('txteps')) ? 'has-erro' : ''; ?>">
                                 <label for="documento">EPS</label>
                                 <select name="txteps" id="txteps" class="form-control selectpicker" data-live-search="true">

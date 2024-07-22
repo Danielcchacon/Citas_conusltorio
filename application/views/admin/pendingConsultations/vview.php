@@ -1,3 +1,10 @@
+<style>
+
+.fc-day-today {
+    background-color: #b4c0cd !important;
+}
+</style>
+
 <div class="container">
     <h2>Citas pendientes</h2>
     <div style="width:100%" id="calendarMedico"></div>

@@ -45,6 +45,17 @@
             background-color: #2A3F54 !important;
             border-color: #2A3F54 !important;
         }
+
+        /* Asegúrate de que este CSS está siendo aplicado */
+.is-invalid {
+    border-color: #dc3545; /* Rojo para campos inválidos */
+}
+
+.invalid-feedback {
+    color: #dc3545;
+    display: block; /* Asegúrate de que el mensaje de error sea visible */
+}
+
     </style>
 </head>
 <body class="nav-md">

@@ -29,10 +29,10 @@ class cdashboard extends CI_Controller {
 	}
 
 	public function caddcita() {
-		$id_medico = $this->input->post('id_medico');
-		$id_paciente = $this->input->post('id_paciente');
-		$id_tipo_consulta = $this->input->post('id_tipo_consulta');
-		$horayfecha = $this->input->post('horayfecha');
+		$id_medico = $this->input->post('txtmedico');
+		$id_paciente = $this->input->post('txtpaciente');
+		$id_tipo_consulta = $this->input->post('txtconsulta');
+		$horayfecha = $this->input->post('fecha_hora');
 
 		log_message('info', 'Medico ID: ' . $id_medico);
         log_message('info', 'Paciente ID: ' . $id_paciente);
@@ -41,11 +41,12 @@ class cdashboard extends CI_Controller {
 		$result = $this->mdashboard->minsertcita($id_medico, $id_paciente, $id_tipo_consulta, $horayfecha);
 	
 		// Check result and perform necessary actions
-		if ($result) {
+		if ($result ==="Consulta agregada exitosamente.") {
 			$this->session->set_flashdata('success', 'Guardo Correctamente');
 				redirect(base_url() . 'cdashboard');
 		}else{
-			$this->session->set_flashdata('error', 'Guardo Correctamente');
+			$this->session->set_flashdata('error', $result);
+			redirect(base_url() . 'cdashboard');
 		}
 	
 		// Redirect or load a view

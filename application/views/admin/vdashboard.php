@@ -13,6 +13,15 @@
   .fc-timegrid-day.fc-day-today {
     background-color: #2A3F54 !important; /* Color de fondo deseado */
   }
+
+  .fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+
+    color: white !important;
+}
+
+
+
+/* .fc .fc-daygrid-day-frame */
 </style>
 <?php if ($this->session->flashdata('error')): ?>
                             <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
@@ -66,6 +75,27 @@
   <h2>Calendario</h2>
   <div style="width:100%" id="calendar"></div>
 
+  <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eventModalLabel">Detalles de la Cita</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Paciente:</strong> <span id="modal-paciente"></span></p>
+          <p><strong>Documento:</strong> <span id="modal-documento"></span></p>
+          <p><strong>Fecha y Hora:</strong> <span id="modal-fecha"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal -->
   <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="dateModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -112,7 +142,9 @@
         <option value="">Seleccione Paciente</option>
         <?php foreach ($pacientecombo as $atributos): ?>
           <option value="<?php echo $atributos->paciente_id ?>"><?php echo $atributos->nombres_paciente . " " . $atributos->apellidos_paciente ?></option>
-        <?php endforeach ?>
+          
+
+          <?php endforeach ?>
       </select>
     </div>
 
@@ -122,7 +154,9 @@
         <option value="0">Seleccione Tipo de Consulta</option>
         <?php foreach ($tipodeconsulta as $atributos): ?>
           <option value="<?php echo $atributos->tipo_consulta_id ?>"><?php echo $atributos->descripcion_tipo_consulta ?></option>
-        <?php endforeach ?>
+          <?php endforeach ?>
+          <option value="6">error</option>
+
       </select>
     </div>
 
@@ -141,42 +175,56 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var citas = <?php echo json_encode($citasindex); ?>;
+document.addEventListener('DOMContentLoaded', function() {
+  var citas = <?php echo json_encode($citasindex); ?>;
+  console.log(citas);
+  
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    locale: 'es',
+    headerToolbar: {
+      left: 'dayGridMonth,listWeek',
+      center: 'title',
+      right: 'prev,next today'
+    },
+    dateClick: function(info) {
+      // Mostrar la fecha seleccionada en el modal
+      document.getElementById('selectedDate').innerText = 'Fecha seleccionada: ' + info.dateStr;
 
-    var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      locale: 'es',
-      headerToolbar: {
-        left: 'dayGridMonth,listWeek',
-        center: 'title',
-        right: 'prev,next today'
-      },
-      dateClick: function(info) {
-        // Mostrar la fecha seleccionada en el modal
-        document.getElementById('selectedDate').innerText = 'Fecha seleccionada: ' + info.dateStr;
-
-        // Establecer el valor de la fecha seleccionada en el campo de fecha
-        document.getElementById('fecha').value = info.dateStr;
-
-    
-
-   
-
-        // Abrir el modal
-        $('#dateModal').modal('show');
-      },
-      events: citas.map(function(cita) {
-        return {
-          title: cita.nombre_paciente + ' con ' + cita.nombre_medico,
-          start: cita.fecha_consulta,
-          allDay: false
-        };
-      })
-    });
-    calendar.render();
+      // Establecer el valor de la fecha seleccionada en el campo de fecha
+      document.getElementById('fecha').value = info.dateStr;
+      
+      // Abrir el modal
+      $('#dateModal').modal('show');
+    },
+    events: citas.map(function(cita) {
+      return {
+        title: cita.nombre_paciente,
+        start: cita.fecha_consulta,
+        allDay: false,
+        extendedProps: {
+          nombre_paciente: cita.nombre_paciente,
+          documento: cita.documento,
+          fecha_consulta: cita.fecha_consulta
+        }
+      };
+    }),
+    eventClick: function(info) {
+      var modal = document.getElementById('eventModal');
+      var span = document.getElementsByClassName('close')[0];
+      
+      document.getElementById('modal-paciente').textContent = info.event.extendedProps.nombre_paciente;
+      document.getElementById('modal-documento').textContent = info.event.extendedProps.documento;
+      document.getElementById('modal-fecha').textContent = info.event.extendedProps.fecha_consulta;
+      
+      $('#eventModal').modal('show');
+    }
   });
+  
+  calendar.render();
+});
+
 
   function CerrarModal() {
     $('#dateModal').modal('hide');

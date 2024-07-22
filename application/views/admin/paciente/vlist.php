@@ -35,7 +35,10 @@
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Documento</th>
+                                    
+
                                     <th>telefono</th>
+                                    <th>Correo</th>
                                     <th>Regimen</th>
                                     <th>EPS</th>
                                     <th>Opciones</th>
@@ -49,6 +52,8 @@
                                             <td><?php echo $atributos->apellidos_paciente; ?></td>
                                             <td><?php echo $atributos->documento_paciente; ?></td>
                                             <td><?php echo $atributos->telefono_paciente; ?></td>
+                                            <td><?php echo $atributos->correo_paciente; ?></td>
+
                                             <td><?php echo $atributos->descripcion_tipo_regimen; ?></td>
                                             <td><?php echo $atributos->nombre_eps; ?></td>
                                           

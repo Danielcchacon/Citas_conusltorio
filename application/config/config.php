@@ -23,10 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 
-$config['base_url'] = 'http://10.198.25.30:80/ventas/';
 */
-
 $config['base_url'] = 'http://localhost:80/consultorio/';
+
+// $config['base_url'] = 'https://3d06-181-55-22-205.ngrok-free.app/consultorio/';
 // $config['base_url'] = 'https://bd5f-200-41-79-230.ngrok-free.app/ventas/';
 /*
 |--------------------------------------------------------------------------
@@ -225,7 +225,7 @@ $config['allow_get_array'] = TRUE;
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 3;
 
 /*
 |--------------------------------------------------------------------------

@@ -13,7 +13,7 @@ class Mpaciente  extends CI_Model  {
     public function mselectpaciente() {
         // Select the desired columns from the tables
         $this->db->select('
-p.paciente_id, p.nombres_paciente, p.apellidos_paciente, p.documento_paciente, p.telefono_paciente, tr.descripcion_tipo_regimen, e.nombre_eps');
+p.paciente_id, p.nombres_paciente, p.apellidos_paciente, p.documento_paciente, p.telefono_paciente, p.correo_paciente,tr.descripcion_tipo_regimen, e.nombre_eps');
         $this->db->from('consultorio.paciente p');
         $this->db->join('tipo_regimen tr', 'tr.tipo_regimen_id = p.tipo_paciente', 'inner');
         $this->db->join('eps e', 'e.eps_id = p.eps_paciente', 'inner');

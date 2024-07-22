@@ -17,7 +17,7 @@ class Cusuarios extends CI_Controller
 	{
 		$data = array(
 			'usuariosindex' => $this->musuarios->mselectusuarios(),
-			
+
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
@@ -29,51 +29,55 @@ class Cusuarios extends CI_Controller
 	{
 
 		$data = array(
-			
-			'eps_usuarioscombo' => $this->mcombo->mcombotable('eps'),
-			'tipo_regimencombo' => $this->mcombo->mcombotable('tipo_regimen'),
+			'tipo_usuariocombo' => $this->mcombo->mcombotable('tipo_usuario'),
+
+
+	
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/usuarios/vadd',$data);
+		$this->load->view('admin/usuarios/vadd', $data);
 		$this->load->view('layouts/footer');
 
 	}
 	public function cinsert()
+{
+    $this->form_validation->set_rules('txtnombre', 'Nombre', 'required');
+    $this->form_validation->set_rules('txtapellido', 'Apellido', 'required');
+    $this->form_validation->set_rules('txtdocumento', 'Documento', 'required|is_unique[usuario.documento_usuario]');
+    $this->form_validation->set_rules('txttelefono', 'Telefono', 'required');
+    $this->form_validation->set_rules('txtcorreo', 'Correo', 'required|valid_email');
+    $this->form_validation->set_rules('txtrol', 'ROL', 'required');
+    $this->form_validation->set_rules('txtcontraseña', 'Contraseña', 'required');
+
+    if ($this->form_validation->run() == FALSE) {
+        $this->session->set_flashdata('error', validation_errors());
+        $this->cadd();
+    } else {
+        $data = array(
+            'nombres_usuario' => $this->input->post('txtnombre'),
+            'apellidos_usuario' => $this->input->post('txtapellido'),
+            'documento_usuario' => $this->input->post('txtdocumento'),
+            'correo_usuario' => $this->input->post('txtcorreo'),
+            'telefono_usuario' => $this->input->post('txttelefono'),
+            'tipo_usuario' => $this->input->post('txtrol'),
+            'contrasena_usuario' => $this->input->post('txtcontraseña')
+        );
+
+        $res = $this->musuarios->minsertusuarios($data);
+        if ($res) {
+            $this->session->set_flashdata('success', 'Guardo Correctamente');
+            redirect(base_url() . 'mantenimiento/cusuarios');
+        } else {
+            $this->session->set_flashdata('error', 'No se pudo guardar el usuario');
+            $this->cadd();
+        }
+    }
+}
+
+
+	public function cedit($idusuarios)
 	{
-		
-		$idusuarios = $this->input->post('txtidusuarios');
-$nombre = $this->input->post('txtnombre'); // Cambio aquí
-$apellido = $this->input->post('txtapellido'); // Cambio aquí
-$documento = $this->input->post('txtdocumento'); // Si este campo también se ha cambiado, actualízalo en el formulario
-$telefono = $this->input->post('txttelefono');
-$eps_id = $this->input->post('txteps'); // Asegúrate de que este campo exista en el formulario
-$regimen = $this->input->post('txtregimen');
-
-$data = array(
-	'usuarios_id' => $idusuarios,
-	'nombres_usuarios' => $nombre,
-	'apellidos_usuarios'   => $apellido,
-	'documento_usuarios' => $documento,
-	'telefono_usuarios'=> $telefono,
-	'eps_usuarios'=> $eps_id,
-	'tipo_usuarios'=> $regimen,
-	
-);
-			$res = $this->musuarios->minsertusuarios($data);
-			if ($res) {
-				$this->session->set_flashdata('success', 'Guardo Correctamente');
-				redirect(base_url() . 'mantenimiento/cusuarios');
-			
-		} else {
-			$this->session->set_flashdata('error', 'No se puedo guardar la usuarios');
-			$this->cadd();
-		}
-
-
-	}
-
-	public function cedit($idusuarios){
 
 		$data = array(
 			'usuariosedit' => $this->musuarios->miupdateusuarios($idusuarios),
@@ -86,60 +90,71 @@ $data = array(
 
 	}
 
-	public function cupdate(){
 
+	public function cupdate()
+	{
 		$idusuarios = $this->input->post('txtidusuarios');
-$nombre = $this->input->post('txtnombre'); // Cambio aquí
-$apellido = $this->input->post('txtapellido'); // Cambio aquí
-$documento = $this->input->post('txtdocumento'); // Si este campo también se ha cambiado, actualízalo en el formulario
-$telefono = $this->input->post('txttelefono');
-$eps_id = $this->input->post('txteps'); // Asegúrate de que este campo exista en el formulario
-$regimen = $this->input->post('txtregimen');
-
+		$nombre = $this->input->post('txtnombre');
+		$apellido = $this->input->post('txtapellido');
+		$documento = $this->input->post('txtdocumento');
+		$telefono = $this->input->post('txttelefono');
+		$correo = $this->input->post('txtcorreo');
+		$rol = $this->input->post('txtrol');
+		$contrasena = $this->input->post('txtcontrasena');
+	
 		$usuariosActual = $this->musuarios->miupdateusuarios($idusuarios);
-		// var_dump($usuariosActual);
-		// if ($codigo == $usuariosActual->codigo) {
-		// 	$unique = '';
-		// } else {
-
-		// 	$unique = '|is_unique[usuarios.codigo]';
-		// }
-		// $this->form_validation->set_rules('txtcodigo', 'codigo', 'required' . $unique);
-
-		// if ($this->form_validation->run()) {
+	
+		if ($documento == $usuariosActual->documento_usuario) {
+			$unique_doc = '';
+		} else {
+			$unique_doc = '|is_unique[usuario.documento_usuario]';
+		}
+	
+		if ($correo == $usuariosActual->correo_usuario) {
+			$unique_email = '';
+		} else {
+			$unique_email = '|is_unique[usuario.correo_usuario]';
+		}
+	
+		$this->form_validation->set_rules('txtdocumento', 'documento', 'required' . $unique_doc);
+		$this->form_validation->set_rules('txtcorreo', 'correo', 'required|valid_email' . $unique_email);
+		$this->form_validation->set_rules('txtnombre', 'nombre', 'required');
+		$this->form_validation->set_rules('txtapellido', 'apellido', 'required');
+		$this->form_validation->set_rules('txttelefono', 'telefono', 'required');
+	
+		if ($this->form_validation->run()) {
 			$data = array(
-				'usuarios_id' => $idusuarios,
-				'nombres_usuarios' => $nombre,
-				'apellidos_usuarios'   => $apellido,
-				'documento_usuarios' => $documento,
-				'telefono_usuarios'=> $telefono,
-				'eps_usuarios'=> $eps_id,
-				'tipo_usuarios'=> $regimen,
+				'usuario_id' => $idusuarios,
+				'nombres_usuario' => $nombre,
+				'apellidos_usuario' => $apellido,
+				'documento_usuario' => $documento,
+				'correo_usuario' => $correo,
+				'telefono_usuario' => $telefono,
+				'tipo_usuario' => $rol,
 			);
+	
+			if ($contrasena) {
+				$data['contrasena_usuario'] = $contrasena;
+			}
+	
 			$res = $this->musuarios->mupdateusuarios($idusuarios, $data);
-
+	
 			if ($res) {
 				$this->session->set_flashdata('success', 'Se Guardó Correctamente');
-				redirect(base_url() . '/mantenimiento/cusuarios');
+				redirect(base_url() . 'mantenimiento/cusuarios');
 			} else {
-
-				$this->session->set_flashdata('error', 'No se puedo Actulizar la usuarios ');
-				redirect(base_url() . '/mantenimiento/cusuarios/cedit' . $idusuarios);
+				$this->session->set_flashdata('error', 'No se pudo actualizar el usuario');
+				redirect(base_url() . 'mantenimiento/cusuarios/cedit/' . $idusuarios);
 			}
-		// } else {
-		// 	$this->session->set_flashdata('error', 'No se pudo guardar la usuarios ');
-		// 	$this->cedit($idusuarios);
-
-
-		// }
+		} else {
+			$this->session->set_flashdata('error', validation_errors());
+			$this->cedit($idusuarios);
+		}
 	}
-	//DELETE 
-	// public function cdelete($idusuarios){
-	// 	$this->musuarios->mdeleteusuarios($idusuarios);
-	// 	redirect(base_url() . "mantenimiento/cusuarios");
-	// }
+	
 
-	public function cdelete($idusuarios) {
+	public function cdelete($idusuarios)
+	{
 		try {
 			$this->musuarios->mdeleteusuarios($idusuarios);
 			echo "cusuarios";
@@ -153,4 +168,4 @@ $regimen = $this->input->post('txtregimen');
 		}
 	}
 }
-?> 
+?>
