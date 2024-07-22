@@ -17,6 +17,8 @@ class CpendingConsultations extends CI_Controller
 	{
 		$data = array(
 			'pendingConsultationsindex' => $this->mpendingConsultations->mselectpendingConsultations(),
+			'medicocombo' => $this->mcombo->mcombotable('medico')
+
 			
 		);
 		$this->load->view('layouts/header');

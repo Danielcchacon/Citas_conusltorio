@@ -39,42 +39,54 @@ class Cpaciente extends CI_Controller
 		$this->load->view('layouts/footer');
 
 	}
-	public function cinsert()
-	{
-		
-		$idpaciente = $this->input->post('txtidpaciente');
-$nombre = $this->input->post('txtnombre'); // Cambio aquí
-$apellido = $this->input->post('txtapellido'); // Cambio aquí
-$documento = $this->input->post('txtdocumento'); // Si este campo también se ha cambiado, actualízalo en el formulario
-$telefono = $this->input->post('txttelefono');
-$correo = $this->input->post('txtcorreo'); // Si este campo también se ha cambiado, actualízalo en el formulario
+public function cinsert()
+{
+    $this->load->library('form_validation');
 
-$eps_id = $this->input->post('txteps'); // Asegúrate de que este campo exista en el formulario
-$regimen = $this->input->post('txtregimen');
+    // Configurar reglas de validación
+    $this->form_validation->set_rules('txtnombre', 'Nombre', 'required');
+    $this->form_validation->set_rules('txtapellido', 'Apellido', 'required');
+    $this->form_validation->set_rules('txtdocumento', 'Documento', 'required|is_unique[paciente.documento_paciente]');
+    $this->form_validation->set_rules('txtcorreo', 'Correo', 'required|valid_email|is_unique[paciente.correo_paciente]');
+    $this->form_validation->set_rules('txttelefono', 'Telefono', 'required');
 
-$data = array(
-	'paciente_id' => $idpaciente,
-	'nombres_paciente' => $nombre,
-	'apellidos_paciente'   => $apellido,
-	'documento_paciente' => $documento,
-	'telefono_paciente'=> $telefono,
-	'correo_paciente'=>$correo,
-	'eps_paciente'=> $eps_id,
-	'tipo_paciente'=> $regimen,
-	
-);
-			$res = $this->mpaciente->minsertpaciente($data);
-			if ($res) {
-				$this->session->set_flashdata('success', 'Guardo Correctamente');
-				redirect(base_url() . 'mantenimiento/cpaciente');
-			
-		} else {
-			$this->session->set_flashdata('error', 'No se puedo guardar la paciente');
-			$this->cadd();
-		}
+    if ($this->form_validation->run() === FALSE) {
+        // Si hay errores de validación, vuelve al formulario de agregar
+        $this->session->set_flashdata('error', validation_errors());
+        $this->cadd();
+    } else {
+        $idpaciente = $this->input->post('txtidpaciente');
+        $nombre = $this->input->post('txtnombre');
+        $apellido = $this->input->post('txtapellido');
+        $documento = $this->input->post('txtdocumento');
+        $telefono = $this->input->post('txttelefono');
+        $correo = $this->input->post('txtcorreo');
+        $eps_id = $this->input->post('txteps');
+        $regimen = $this->input->post('txtregimen');
 
+        $data = array(
+            'paciente_id' => $idpaciente,
+            'nombres_paciente' => $nombre,
+            'apellidos_paciente' => $apellido,
+            'documento_paciente' => $documento,
+            'telefono_paciente' => $telefono,
+            'correo_paciente' => $correo,
+            'eps_paciente' => $eps_id,
+            'tipo_paciente' => $regimen,
+        );
 
-	}
+        $res = $this->mpaciente->minsertpaciente($data);
+
+        if ($res) {
+            $this->session->set_flashdata('success', 'Guardado Correctamente');
+            redirect(base_url() . 'mantenimiento/cpaciente');
+        } else {
+            $this->session->set_flashdata('error', 'No se pudo guardar el paciente');
+            $this->cadd();
+        }
+    }
+}
+
 
 	public function cedit($idpaciente){
 
@@ -90,61 +102,82 @@ $data = array(
 
 	}
 
-	public function cupdate(){
-
+	public function cupdate()
+	{
+		$this->load->library('form_validation');
+	
 		$idpaciente = $this->input->post('txtidpaciente');
-$nombre = $this->input->post('txtnombre'); // Cambio aquí
-$apellido = $this->input->post('txtapellido'); // Cambio aquí
-$documento = $this->input->post('txtdocumento'); // Si este campo también se ha cambiado, actualízalo en el formulario
-$telefono = $this->input->post('txttelefono');
-$correo = $this->input->post('txtcorreo');
-
-$eps_id = $this->input->post('txteps'); // Asegúrate de que este campo exista en el formulario
-$regimen = $this->input->post('txtregimen');
-
-		$pacienteActual = $this->mpaciente->miupdatepaciente($idpaciente);
-		// var_dump($pacienteActual);
-		// if ($codigo == $pacienteActual->codigo) {
-		// 	$unique = '';
-		// } else {
-
-		// 	$unique = '|is_unique[paciente.codigo]';
-		// }
-		// $this->form_validation->set_rules('txtcodigo', 'codigo', 'required' . $unique);
-
-		// if ($this->form_validation->run()) {
+		$nombre = $this->input->post('txtnombre');
+		$apellido = $this->input->post('txtapellido');
+		$documento = $this->input->post('txtdocumento');
+		$telefono = $this->input->post('txttelefono');
+		$correo = $this->input->post('txtcorreo');
+		$eps_id = $this->input->post('txteps');
+		$regimen = $this->input->post('txtregimen');
+	
+		// Configurar reglas de validación
+		$this->form_validation->set_rules('txtnombre', 'Nombre', 'required');
+		$this->form_validation->set_rules('txtapellido', 'Apellido', 'required');
+		$this->form_validation->set_rules('txtdocumento', 'Documento', 'required|callback_check_documento_unique');
+		$this->form_validation->set_rules('txtcorreo', 'Correo', 'required|valid_email|callback_check_correo_unique');
+		$this->form_validation->set_rules('txttelefono', 'Telefono', 'required');
+	
+		if ($this->form_validation->run() === FALSE) {
+			// Si hay errores de validación, vuelve al formulario de edición
+			$this->session->set_flashdata('error', validation_errors());
+			redirect(base_url() . '/mantenimiento/cpaciente/cedit/' . $idpaciente);
+		} else {
 			$data = array(
-				'paciente_id' => $idpaciente,
 				'nombres_paciente' => $nombre,
-				'apellidos_paciente'   => $apellido,
+				'apellidos_paciente' => $apellido,
 				'documento_paciente' => $documento,
 				'correo_paciente' => $correo,
-				'telefono_paciente'=> $telefono,
-				'eps_paciente'=> $eps_id,
-				'tipo_paciente'=> $regimen,
+				'telefono_paciente' => $telefono,
+				'eps_paciente' => $eps_id,
+				'tipo_paciente' => $regimen,
 			);
+	
 			$res = $this->mpaciente->mupdatepaciente($idpaciente, $data);
-
+	
 			if ($res) {
 				$this->session->set_flashdata('success', 'Se Guardó Correctamente');
 				redirect(base_url() . '/mantenimiento/cpaciente');
 			} else {
-
-				$this->session->set_flashdata('error', 'No se puedo Actulizar la paciente ');
-				redirect(base_url() . '/mantenimiento/cpaciente/cedit' . $idpaciente);
+				$this->session->set_flashdata('error', 'No se pudo actualizar el paciente');
+				redirect(base_url() . '/mantenimiento/cpaciente/cedit/' . $idpaciente);
 			}
-		// } else {
-		// 	$this->session->set_flashdata('error', 'No se pudo guardar la paciente ');
-		// 	$this->cedit($idpaciente);
-
-
-		// }
+		}
 	}
-	//DELETE 
-	// public function cdelete($idpaciente){
-	// 	$this->mpaciente->mdeletepaciente($idpaciente);
-	// 	redirect(base_url() . "mantenimiento/cpaciente");
-	// }
+	
+	// Callback para validar documento único
+	public function check_documento_unique($documento)
+	{
+		$idpaciente = $this->input->post('txtidpaciente');
+		$this->db->where('documento_paciente', $documento);
+		$this->db->where('paciente_id !=', $idpaciente);
+		$query = $this->db->get('paciente'); // Ajusta el nombre de la tabla si es necesario
+		if ($query->num_rows() > 0) {
+			$this->form_validation->set_message('check_documento_unique', 'El documento ya está registrado');
+			return FALSE;
+		}
+		return TRUE;
+	}
+	
+	// Callback para validar correo único
+	public function check_correo_unique($correo)
+	{
+		$idpaciente = $this->input->post('txtidpaciente');
+		$this->db->where('correo_paciente', $correo);
+		$this->db->where('paciente_id !=', $idpaciente);
+		$query = $this->db->get('paciente'); // Ajusta el nombre de la tabla si es necesario
+		if ($query->num_rows() > 0) {
+			$this->form_validation->set_message('check_correo_unique', 'El correo ya está registrado');
+			return FALSE;
+		}
+		return TRUE;
+	}
+	
+	
 
 	public function cdelete($idpaciente) {
 		try {

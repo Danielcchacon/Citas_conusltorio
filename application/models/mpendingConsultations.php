@@ -3,7 +3,7 @@ class MpendingConsultations  extends CI_Model  {
   
     public function mselectpendingConsultations() {
         // Selecciona las columnas que deseas obtener
-        $this->db->select('fecha_consulta, p.nombres_paciente AS nombre_paciente, m.nombres_medico AS nombre_medico, c.antecedentes_medicos, c.examen_fisico, c.diagnostico, c.tratamiento_medico, c.evolucion_paciente');
+        $this->db->select('fecha_consulta, p.nombres_paciente AS nombre_paciente, p.apellidos_paciente AS apellido_paciente, p.documento_paciente as documento, m.medico_id, m.nombres_medico AS nombre_medico, m.apellidos_medico AS apellidos_medico, c.antecedentes_medicos, c.examen_fisico, c.diagnostico, c.tratamiento_medico, c.evolucion_paciente');
         
         // Define la tabla principal
         $this->db->from('consulta c');
