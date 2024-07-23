@@ -220,17 +220,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }),
     eventClick: function(info) {
       var modal = document.getElementById('eventModal');
-      var span = document.getElementsByClassName('close')[0];
-      
-      document.getElementById('modal-paciente').textContent = info.event.extendedProps.nombre_paciente;
-      document.getElementById('modal-documento').textContent = info.event.extendedProps.documento;
-      document.getElementById('modal-fecha').textContent = info.event.extendedProps.fecha_consulta;
+  var span = document.getElementsByClassName('close')[0];
+  
+  // Asumiendo que 'info' es el objeto que contiene los datos del evento
+  document.getElementById('modal-paciente').textContent = info.event.extendedProps.nombre_paciente;
+  document.getElementById('modal-documento').textContent = info.event.extendedProps.documento;
+  document.getElementById('modal-fecha').textContent = info.event.extendedProps.fecha_consulta;
 
-      var url = "<?php echo base_url(); ?>cdashboard/cdelete/" + info.event.extendedProps.idconsulta;
-    // Establece el href del enlace
-    document.getElementById("cancelButton").href = url;
-      
-      $('#eventModal').modal('show');
+  var url = "<?php echo base_url(); ?>cdashboard/cdelete/" + info.event.extendedProps.idconsulta;
+  // Establece el href del enlace
+  document.getElementById("cancelButton").setAttribute('data-url', url);
+
+  // Añadir el evento de confirmación antes de redirigir
+  document.getElementById('cancelButton').addEventListener('click', function(event) {
+    event.preventDefault(); // Previene la acción por defecto del enlace
+    var url = this.getAttribute('data-url');
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¿Deseas cancelar esta cita?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cancelar',
+      cancelButtonText: 'No, mantener'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = url; // Redirige a la URL si se confirma
+      }
+    });
+  });
+
+  $('#eventModal').modal('show');
     }
   });
   
