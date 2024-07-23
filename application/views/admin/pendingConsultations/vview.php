@@ -4,7 +4,6 @@
     background-color: #b4c0cd !important;
 }
 </style>
-<?php var_dump($pendingConsultationsindex) ?>
 <div class="container">
     <h2>Citas pendientes</h2>
     <div style="width:100%" id="calendarMedico"></div>

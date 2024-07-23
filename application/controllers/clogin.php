@@ -31,6 +31,7 @@ $data =array(
     'login'     => TRUE,
 
 );
+var_dump($data);
 echo $this->session->set_userdata($data);
 redirect(base_url(). 'cdashboard');
     }

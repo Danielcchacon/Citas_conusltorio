@@ -51,6 +51,31 @@ class cdashboard extends CI_Controller {
 	
 		// Redirect or load a view
 	}
-	
+	public function cdelete($idconsulta)
+{
+    try {
+        // Llama al método del modelo para eliminar la consulta
+        $this->mdashboard->mdeletedashboard($idconsulta);
+        
+        // Establece un mensaje de éxito en la sesión
+        $this->session->set_flashdata('success', 'Se cancelo la consulta correctamente');
+        
+        // Redirige al usuario al dashboard
+        redirect(base_url() . 'cdashboard');
+    } catch (\Exception $e) {
+        // Captura la excepción y muestra un mensaje específico
+        if (isset($e->errorInfo[1]) && $e->errorInfo[1] == 1451) {
+            // Establece un mensaje de error en la sesión
+            $this->session->set_flashdata('error', 'No se puede eliminar la consulta. Está asociada a otros registros.');
+        } else {
+            // Establece un mensaje genérico de error en la sesión
+            $this->session->set_flashdata('error', 'Error: ' . $e->getMessage());
+        }
+        
+        // Redirige al usuario al dashboard
+        redirect(base_url() . 'cdashboard');
+    }
+}
+
 }
 ?>

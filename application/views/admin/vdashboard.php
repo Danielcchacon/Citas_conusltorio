@@ -51,7 +51,7 @@
                             <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
                             <script>
                                 Swal.fire({
-                                    title: 'Registro Exitoso',
+                                    title: 'Operacion Exitosa',
                                     text: '<?php echo $this->session->flashdata('success'); ?>',
                                     icon: 'success',
                                     showConfirmButton: false, // No mostrar botón OK
@@ -71,6 +71,7 @@
                                 }
                             </style>
                         <?php endif; ?>
+                       
 <div class="container">
   <h2>Calendario</h2>
   <div style="width:100%" id="calendar"></div>
@@ -85,12 +86,18 @@
           </button>
         </div>
         <div class="modal-body">
-          <p><strong>Paciente:</strong> <span id="modal-paciente"></span></p>
-          <p><strong>Documento:</strong> <span id="modal-documento"></span></p>
-          <p><strong>Fecha y Hora:</strong> <span id="modal-fecha"></span></p>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <p><strong>Paciente:</strong> <span id="modal-paciente"></span></p>
+            <p><strong>Documento:</strong> <span id="modal-documento"></span></p>
+            <p><strong>Fecha y Hora:</strong> <span id="modal-fecha"></span></p>
+          </div>
+          <a href="#" class="btn btn-danger" id="cancelButton" href="<?php echo base_url(); ?>cdashboard/cdelete/">Cancelar Cita</a>
         </div>
+      </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
         </div>
       </div>
     </div>
@@ -204,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         start: cita.fecha_consulta,
         allDay: false,
         extendedProps: {
+          idconsulta:cita.consulta_id,
           nombre_paciente: cita.nombre_paciente,
           documento: cita.documento,
           fecha_consulta: cita.fecha_consulta
@@ -217,6 +225,10 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('modal-paciente').textContent = info.event.extendedProps.nombre_paciente;
       document.getElementById('modal-documento').textContent = info.event.extendedProps.documento;
       document.getElementById('modal-fecha').textContent = info.event.extendedProps.fecha_consulta;
+
+      var url = "<?php echo base_url(); ?>cdashboard/cdelete/" + info.event.extendedProps.idconsulta;
+    // Establece el href del enlace
+    document.getElementById("cancelButton").href = url;
       
       $('#eventModal').modal('show');
     }

@@ -2,6 +2,8 @@
 class Mdashboard  extends CI_Model  {
     public function mselectdashboard() {
         $this->db->select('
+                    c.consulta_id,
+
             c.fecha_consulta,
             p.nombres_paciente AS nombre_paciente,
             m.nombres_medico AS nombre_medico,
@@ -44,8 +46,8 @@ class Mdashboard  extends CI_Model  {
     return $this->db->update('dashboard', $date);
     }
     public function mdeletedashboard($iddashboard) {
-    $this->db->where('dashboard_id',$iddashboard);
-    return $this->db->delete('dashboard');
+    $this->db->where('consulta_id',$iddashboard);
+    return $this->db->delete('consulta');
     }
 
 }
